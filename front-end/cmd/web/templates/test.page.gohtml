@@ -4,9 +4,11 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <h1 class="mt-5"> Microservices Tester v1.0</h1>
+                <h1 class="mt-5">Microservices Tester v1.0</h1>
                 <hr>
                 <a id="brokerBtn" class="btn btn-outline-secondary" href="javascript:void(0);">Testing Broker API </a>
+                <a id="authBrokerBtn" class="btn btn-outline-secondary" href="javascript:void(0);">Testing Auth API </a>
+                <a id="logBtn" class="btn btn-outline-secondary" href="javascript:void(0);">Testing Log API </a>
 
                 <div id="output" class="mt-5" style="outline: 1px solid silver; padding: 2em;">
                     <span class="text-muted">Output shows here...</span>
@@ -15,15 +17,15 @@
         </div>
         <div class="row">
             <div class="col">
-                <h4 class="mt-5"> Message Sent</h4>
+                <h4 class="mt-5">Sent</h4>
                 <div class="mt-1" style="outline: 1px solid silver; padding: 2em;">
-                    <pre id="payload"><span class="text-muted">Nothing sent yet...</span></pre>
+                    <pre id="payload"><span class="text-muted">Nothing sent yet !!!...</span></pre>
                 </div>
             </div>
             <div class="col">
-                <h4 class="mt-5">Message Received</h4>
+                <h4 class="mt-5">Received</h4>
                 <div class="mt-1" style="outline: 1px solid silver; padding: 2em;">
-                    <pre id="received"><span class="text-muted">No Message received yet !!! Loading...</span></pre>
+                    <pre id="received"><span class="text-muted">Nothing received yet !!!...</span></pre>
                 </div>
             </div>
         </div>
@@ -32,30 +34,103 @@
 
 {{define "js"}}
     <script>
-        let brokerBtn = document.getElementById("brokerBtn");
-        let output = document.getElementById("output");
-        let sent = document.getElementById("payload");
-        let received = document.getElementById("received");
-        brokerBtn.addEventListener("click", function() {
-            const body = {
-                method: 'POST',
+    let brokerBtn = document.getElementById("brokerBtn");
+    let authBrokerBtn = document.getElementById("authBrokerBtn");
+    let logBtn = document.getElementById("logBtn");
+    let output = document.getElementById("output");
+    let sent = document.getElementById("payload");
+    let recevied = document.getElementById("received");
 
+    logBtn.addEventListener("click", function() {
+        const payload = {
+            action: "log",
+            log: {
+                name: "event",
+                data: "Some kind of random data",
             }
-            fetch("http:\/\/localhost:8080", body)
-            .then ((response) => response.json())
-            .then((data) =>{
-                sent.innerHTML("The POST request is empty");
-                received.innerHTML = JSON.strongify(data, undefined, 4);
-                if (data.error) {
-                    console.log(data.message);
+        }
 
-                } else {
-                    output.innerHTML += `<br><strong> Broker API Response</strong>: ${data.message}`;
-                }
-            })
-            .catch((error) => {
-                output.innerHTML += "<br><br> Some Error(s) have been Found: " + error;
-            })
+        const headers = new Headers();
+        headers.append("Content-Type", "application/json");
+
+        const body = {
+            method: "POST",
+            body: JSON.stringify(payload),
+            headers: headers,
+        }
+
+        fetch("http:\/\/localhost:8080/handle", body)
+        .then((response) => response.json())
+        .then((data) => {
+            sent.innerHTML = JSON.stringify(payload, undefined, 4);
+            received.innerHTML = JSON.stringify(data, undefined, 4);
+            if (data.error) {
+                output.innerHTML += `<br><strong>Error:</strong> ${data.message}`;
+            } else {
+                output.innerHTML += `<br><strong>Response from broker service</strong>: ${data.message}`;
+            }
         })
+        .catch((error) => {
+            output.innerHTML += "<br><br>Error: " + error;
+        })        
+    })
+
+    authBrokerBtn.addEventListener("click", function() {
+
+        const payload = {
+            action: "auth",
+            auth: {
+                email: "admin@example.com",
+                password: "verysecret",
+            }
+        }
+
+        const headers = new Headers();
+        headers.append("Content-Type", "application/json");
+
+        const body = {
+            method: 'POST',
+            body: JSON.stringify(payload),
+            headers: headers,
+        }
+
+        fetch("http:\/\/localhost:8080/handle", body)
+        .then((response) => response.json())
+        .then((data) => {
+            sent.innerHTML = JSON.stringify(payload, undefined, 4);
+            received.innerHTML = JSON.stringify(data, undefined, 4);
+            if (data.error) {
+                output.innerHTML += `<br><strong>Error:</strong> ${data.message}`;
+            } else {
+                output.innerHTML += `<br><strong>Response from broker service</strong>: ${data.message}`;
+            }
+        })
+        .catch((error) => {
+            output.innerHTML += "<br><br>Some Error(s) have been Found: " + error;
+        })
+    })
+
+    brokerBtn.addEventListener("click", function() {
+
+        const body = {
+            method: 'POST',
+        }
+
+        fetch("http:\/\/localhost:8080", body)
+        .then((response) => response.json())
+        .then((data) => {
+            sent.innerHTML ="The POST request is empty";
+            received.innerHTML = JSON.stringify(data, undefined, 4);
+            if (data.error) {
+                console.log(data.message);
+            } else {
+                output.innerHTML += `<br><strong>Broker API Response</strong>: ${data.message}`;
+            }
+        })
+        .catch((error) => {
+            output.innerHTML += "<br><br>Some Error(s) have been Found: " + error;
+        })
+    })
+        
     </script>
 {{end}}
