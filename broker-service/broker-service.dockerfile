@@ -45,5 +45,6 @@ FROM alpine:latest
 RUN mkdir /app
 
 COPY --from=builder /app/brokerApp /app
+EXPOSE 8080
 
 CMD [ "/app/brokerApp" ]
