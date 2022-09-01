@@ -1,7 +1,11 @@
 package main
 
-import "net/http"
+import (
+	"log"
+	"net/http"
+)
 
+// SendMail receives a json payload for a message, and sends it
 func (app *Config) SendMail(w http.ResponseWriter, r *http.Request) {
 	type mailMessage struct {
 		From    string `json:"from"`
@@ -14,27 +18,29 @@ func (app *Config) SendMail(w http.ResponseWriter, r *http.Request) {
 
 	err := app.readJSON(w, r, &requestPayload)
 	if err != nil {
-		app.errorJSON(w, err)
+		log.Println(err)
+		_ = app.errorJSON(w, err)
 		return
 	}
 
-	msg := Message {
-		From: requestPayload.From,
-		To: requestPayload.To,
+	msg := Message{
+		From:    requestPayload.From,
+		To:      requestPayload.To,
 		Subject: requestPayload.Subject,
-		Data: requestPayload.Message,
+		Data:    requestPayload.Message,
 	}
 
 	err = app.Mailer.SendSMTPMessage(msg)
 	if err != nil {
-		app.errorJSON(w, err)
+		log.Println(err)
+		_ = app.errorJSON(w, err)
 		return
 	}
 
-	payload := jsonResponse {
-		Error: false,
+	payload := jsonResponse{
+		Error:   false,
 		Message: "sent to " + requestPayload.To,
 	}
 
-	app.writeJSON(w, http.StatusAccepted, payload)
+	_ = app.writeJSON(w, http.StatusAccepted, payload)
 }

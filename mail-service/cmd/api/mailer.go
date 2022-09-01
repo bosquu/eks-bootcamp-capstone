@@ -1,15 +1,14 @@
-// get files github.com/vanng822/go-premailer/premailer and github.com/xhit/go-simple-mail/v2
 package main
 
 import (
 	"bytes"
-	"html/template"
-	"time"
-
 	"github.com/vanng822/go-premailer/premailer"
 	mail "github.com/xhit/go-simple-mail/v2"
+	"html/template"
+	"time"
 )
 
+// Mail holds the information necessary to connect to an SMTP server
 type Mail struct {
 	Domain      string
 	Host        string
@@ -21,6 +20,7 @@ type Mail struct {
 	FromName    string
 }
 
+// Message is the type for an email message
 type Message struct {
 	From        string
 	FromName    string
@@ -31,6 +31,8 @@ type Message struct {
 	DataMap     map[string]any
 }
 
+// SendSMTPMessage builds and sends an email message using SMTP. This is called by ListenForMail,
+// and can also be called directly when necessary
 func (m *Mail) SendSMTPMessage(msg Message) error {
 	if msg.From == "" {
 		msg.From = m.FromAddress
@@ -40,10 +42,9 @@ func (m *Mail) SendSMTPMessage(msg Message) error {
 		msg.FromName = m.FromName
 	}
 
-	data := map[string]any {
+	data := map[string]any{
 		"message": msg.Data,
 	}
-
 	msg.DataMap = data
 
 	formattedMessage, err := m.buildHTMLMessage(msg)
@@ -79,6 +80,7 @@ func (m *Mail) SendSMTPMessage(msg Message) error {
 	email.SetBody(mail.TextPlain, plainMessage)
 	email.AddAlternative(mail.TextHTML, formattedMessage)
 
+	// add attachments, if any
 	if len(msg.Attachments) > 0 {
 		for _, x := range msg.Attachments {
 			email.AddAttachment(x)
@@ -89,12 +91,13 @@ func (m *Mail) SendSMTPMessage(msg Message) error {
 	if err != nil {
 		return err
 	}
-	
+
 	return nil
 }
 
+// buildHTMLMessage creates the html version of the message
 func (m *Mail) buildHTMLMessage(msg Message) (string, error) {
-	templateToRender := "./templates/mail.html.gohtml"
+	templateToRender := "./templates/mail.html.tmpl"
 
 	t, err := template.New("email-html").ParseFiles(templateToRender)
 	if err != nil {
@@ -111,35 +114,48 @@ func (m *Mail) buildHTMLMessage(msg Message) (string, error) {
 	if err != nil {
 		return "", err
 	}
-
 	return formattedMessage, nil
 }
 
+// buildPlainTextMessage creates the plaintext version of the message
 func (m *Mail) buildPlainTextMessage(msg Message) (string, error) {
-	templateToRender := "./templates/mail.plain.gohtml"
-
+	templateToRender := "./templates/mail.plain.tmpl"
 	t, err := template.New("email-plain").ParseFiles(templateToRender)
 	if err != nil {
 		return "", err
 	}
 
-	var tpl bytes.Buffer
-	if err = t.ExecuteTemplate(&tpl, "body", msg.DataMap); err != nil {
+	var tplPlain bytes.Buffer
+	if err = t.ExecuteTemplate(&tplPlain, "body", msg.DataMap); err != nil {
 		return "", err
 	}
 
-	plainMessage := tpl.String()
+	plainMessage := tplPlain.String()
 
 	return plainMessage, nil
 }
 
+// getEncryption returns the appropriate encryption type based on a string value
+func (m *Mail) getEncryption(e string) mail.Encryption {
+	switch e {
+	case "tls":
+		return mail.EncryptionSTARTTLS
+	case "ssl":
+		return mail.EncryptionSSLTLS
+	case "none", "":
+		return mail.EncryptionNone
+	default:
+		return mail.EncryptionSTARTTLS
+	}
+}
+
+// inlineCSS takes html input as a string, and inlines css where possible
 func (m *Mail) inlineCSS(s string) (string, error) {
 	options := premailer.Options{
-		RemoveClasses: false,
-		CssToAttributes: false,
+		RemoveClasses:     false,
+		CssToAttributes:   false,
 		KeepBangImportant: true,
 	}
-
 	prem, err := premailer.NewPremailerFromString(s, &options)
 	if err != nil {
 		return "", err
@@ -152,16 +168,7 @@ func (m *Mail) inlineCSS(s string) (string, error) {
 
 	return html, nil
 }
-
-func (m *Mail) getEncryption(s string) mail.Encryption {
-	switch s {
-	case "tls":
-		return mail.EncryptionSTARTTLS
-	case "ssl":
-		return mail.EncryptionSSLTLS
-	case "none", "":
-		return mail.EncryptionNone
-	default:
-		return mail.EncryptionSTARTTLS
-	}
-}
+Footer
+© 2022 GitHub, Inc.
+Footer navigation
+Terms

@@ -1,22 +1,24 @@
 package main
 
 import (
+	"crypto/rand"
 	"encoding/json"
 	"errors"
 	"io"
 	"net/http"
 )
 
+const randomStringSource = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0987654321_+"
+
 type jsonResponse struct {
-	Error bool `json:"error"`
+	Error   bool   `json:"error"`
 	Message string `json:"message"`
-	Data any `json:"data,omitempty"`
+	Data    any    `json:"data,omitempty"`
 }
 
 // readJSON tries to read the body of a request and converts it into JSON
 func (app *Config) readJSON(w http.ResponseWriter, r *http.Request, data any) error {
 	maxBytes := 1048576 // one megabyte
-
 	r.Body = http.MaxBytesReader(w, r.Body, int64(maxBytes))
 
 	dec := json.NewDecoder(r.Body)
@@ -27,7 +29,7 @@ func (app *Config) readJSON(w http.ResponseWriter, r *http.Request, data any) er
 
 	err = dec.Decode(&struct{}{})
 	if err != io.EOF {
-		return errors.New("body must have only a single JSON value")
+		return errors.New("body must have only a single json value")
 	}
 
 	return nil
@@ -70,4 +72,15 @@ func (app *Config) errorJSON(w http.ResponseWriter, err error, status ...int) er
 	payload.Message = err.Error()
 
 	return app.writeJSON(w, statusCode, payload)
+}
+
+// randomString returns a random string of letters of length n
+func (app *Config) randomString(n int) string {
+	s, r := make([]rune, n), []rune(randomStringSource)
+	for i := range s {
+		p, _ := rand.Prime(rand.Reader, len(r))
+		x, y := p.Uint64(), uint64(len(r))
+		s[i] = r[x%y]
+	}
+	return string(s)
 }
