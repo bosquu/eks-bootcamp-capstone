@@ -1,11 +1,12 @@
 package main
 
 import (
+	"embed"
 	"fmt"
 	"html/template"
 	"log"
 	"net/http"
-	"embed"
+	"os"
 )
 
 func main() {
@@ -21,6 +22,7 @@ func main() {
 }
 
 var templateFS embed.FS
+
 func render(w http.ResponseWriter, t string) {
 
 	partials := []string{
@@ -42,7 +44,12 @@ func render(w http.ResponseWriter, t string) {
 		return
 	}
 
-	if err := tmpl.Execute(w, nil); err != nil {
+	var data struct {
+		BrokerURL string
+	}
+	data.BrokerURL = os.Getenv("BROKER_URL")
+
+	if err := tmpl.Execute(w, data); err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
 }
