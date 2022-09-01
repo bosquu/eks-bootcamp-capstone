@@ -168,7 +168,4 @@ func (m *Mail) inlineCSS(s string) (string, error) {
 
 	return html, nil
 }
-Footer
-© 2022 GitHub, Inc.
-Footer navigation
-Terms
+
