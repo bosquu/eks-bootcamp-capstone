@@ -20,7 +20,7 @@ export default class PipelineConstruct extends Construct {
       .name("eks-bootcamp-capstone-pipeline")
       .owner("bosquu")
       .repository({
-          repoUrl: 'eks-bootcamp-capstone/tree/main/cdk',
+          repoUrl: 'eks-bootcamp-capstone',
           credentialsSecretName: 'github-token-capstone',
           targetRevision: 'main'
       })
