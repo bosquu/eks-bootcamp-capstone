@@ -1,8 +1,8 @@
 {
-  "name": "cdk",
+  "name": "eks-bootcamp-capstone",
   "version": "0.1.0",
   "bin": {
-    "cdk": "bin/cdk.js"
+    "eks-bootcamp-capstone": "bin/eks-bootcamp-capstone.js"
   },
   "scripts": {
     "build": "tsc",
