@@ -1,0 +1,2111 @@
+{
+ "Description": "Blueprints tracking (qs-1s1r465k6)",
+ "Resources": {
+  "eksbootcampcapstonepipelinePipelineArtifactsBucket4EAADD3B": {
+   "Type": "AWS::S3::Bucket",
+   "Properties": {
+    "BucketEncryption": {
+     "ServerSideEncryptionConfiguration": [
+      {
+       "ServerSideEncryptionByDefault": {
+        "SSEAlgorithm": "aws:kms"
+       }
+      }
+     ]
+    },
+    "PublicAccessBlockConfiguration": {
+     "BlockPublicAcls": true,
+     "BlockPublicPolicy": true,
+     "IgnorePublicAcls": true,
+     "RestrictPublicBuckets": true
+    }
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain",
+   "Metadata": {
+    "aws:cdk:path": "pipeline-stack/eks-bootcamp-capstone-pipeline/Pipeline/ArtifactsBucket/Resource"
+   }
+  },
+  "eksbootcampcapstonepipelinePipelineArtifactsBucketPolicy961AC145": {
+   "Type": "AWS::S3::BucketPolicy",
+   "Properties": {
+    "Bucket": {
+     "Ref": "eksbootcampcapstonepipelinePipelineArtifactsBucket4EAADD3B"
+    },
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "s3:*",
+       "Condition": {
+        "Bool": {
+         "aws:SecureTransport": "false"
+        }
+       },
+       "Effect": "Deny",
+       "Principal": {
+        "AWS": "*"
+       },
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "eksbootcampcapstonepipelinePipelineArtifactsBucket4EAADD3B",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "eksbootcampcapstonepipelinePipelineArtifactsBucket4EAADD3B",
+             "Arn"
+            ]
+           },
+           "/*"
+          ]
+         ]
+        }
+       ]
+      },
+      {
+       "Action": [
+        "s3:GetBucket*",
+        "s3:GetObject*",
+        "s3:List*"
+       ],
+       "Effect": "Allow",
+       "Principal": {
+        "AWS": {
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":iam::966339691353:role/cdk-hnb659fds-deploy-role-966339691353-us-west-2"
+          ]
+         ]
+        }
+       },
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "eksbootcampcapstonepipelinePipelineArtifactsBucket4EAADD3B",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "eksbootcampcapstonepipelinePipelineArtifactsBucket4EAADD3B",
+             "Arn"
+            ]
+           },
+           "/*"
+          ]
+         ]
+        }
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "pipeline-stack/eks-bootcamp-capstone-pipeline/Pipeline/ArtifactsBucket/Policy/Resource"
+   }
+  },
+  "eksbootcampcapstonepipelinePipelineRole2EC368C7": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "codepipeline.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "pipeline-stack/eks-bootcamp-capstone-pipeline/Pipeline/Role/Resource"
+   }
+  },
+  "eksbootcampcapstonepipelinePipelineRoleDefaultPolicyB1AA4F4C": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "s3:Abort*",
+        "s3:DeleteObject*",
+        "s3:GetBucket*",
+        "s3:GetObject*",
+        "s3:List*",
+        "s3:PutObject",
+        "s3:PutObjectLegalHold",
+        "s3:PutObjectRetention",
+        "s3:PutObjectTagging",
+        "s3:PutObjectVersionTagging"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "eksbootcampcapstonepipelinePipelineArtifactsBucket4EAADD3B",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":s3:::pipeline-stack-support-useplicationbucket1ca69a6cecd73fab93da"
+          ]
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":s3:::pipeline-stack-support-useplicationbucket1ca69a6cecd73fab93da/*"
+          ]
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":s3:::pipeline-stack-support-useplicationbucket65b68dcf9a4e218ea2e8"
+          ]
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":s3:::pipeline-stack-support-useplicationbucket65b68dcf9a4e218ea2e8/*"
+          ]
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "eksbootcampcapstonepipelinePipelineArtifactsBucket4EAADD3B",
+             "Arn"
+            ]
+           },
+           "/*"
+          ]
+         ]
+        }
+       ]
+      },
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "eksbootcampcapstonepipelineCodeBuildActionRole4F3DE8DA",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":iam::966339691353:role/cdk-hnb659fds-deploy-role-966339691353-us-east-1"
+          ]
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":iam::966339691353:role/cdk-hnb659fds-deploy-role-966339691353-us-east-2"
+          ]
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":iam::966339691353:role/cdk-hnb659fds-deploy-role-966339691353-us-west-2"
+          ]
+         ]
+        }
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "eksbootcampcapstonepipelinePipelineRoleDefaultPolicyB1AA4F4C",
+    "Roles": [
+     {
+      "Ref": "eksbootcampcapstonepipelinePipelineRole2EC368C7"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "pipeline-stack/eks-bootcamp-capstone-pipeline/Pipeline/Role/DefaultPolicy/Resource"
+   }
+  },
+  "eksbootcampcapstonepipelinePipeline5DCA41A7": {
+   "Type": "AWS::CodePipeline::Pipeline",
+   "Properties": {
+    "RoleArn": {
+     "Fn::GetAtt": [
+      "eksbootcampcapstonepipelinePipelineRole2EC368C7",
+      "Arn"
+     ]
+    },
+    "Stages": [
+     {
+      "Actions": [
+       {
+        "ActionTypeId": {
+         "Category": "Source",
+         "Owner": "ThirdParty",
+         "Provider": "GitHub",
+         "Version": "1"
+        },
+        "Configuration": {
+         "Owner": "bosquu",
+         "Repo": "eks-bootcamp-capstone",
+         "Branch": "main",
+         "OAuthToken": "{{resolve:secretsmanager:github-token-capstone:SecretString:::}}",
+         "PollForSourceChanges": false
+        },
+        "Name": "bosquu_eks-bootcamp-capstone",
+        "OutputArtifacts": [
+         {
+          "Name": "bosquu_eks_bootcamp_capstone_Source"
+         }
+        ],
+        "RunOrder": 1
+       }
+      ],
+      "Name": "Source"
+     },
+     {
+      "Actions": [
+       {
+        "ActionTypeId": {
+         "Category": "Build",
+         "Owner": "AWS",
+         "Provider": "CodeBuild",
+         "Version": "1"
+        },
+        "Configuration": {
+         "ProjectName": {
+          "Ref": "eksbootcampcapstonepipelinePipelineBuildeksbootcampcapstonepipelinesynthCdkBuildProject1CFE8FA3"
+         },
+         "EnvironmentVariables": "[{\"name\":\"_PROJECT_CONFIG_HASH\",\"type\":\"PLAINTEXT\",\"value\":\"535356f027bdb4b4b5ce73f1d26b99697652973f253a5b75ad4a6898554cc6d1\"}]"
+        },
+        "InputArtifacts": [
+         {
+          "Name": "bosquu_eks_bootcamp_capstone_Source"
+         }
+        ],
+        "Name": "eks-bootcamp-capstone-pipeline-synth",
+        "OutputArtifacts": [
+         {
+          "Name": "eks_bootcamp_capstone_pipeline_synth_Output"
+         }
+        ],
+        "RoleArn": {
+         "Fn::GetAtt": [
+          "eksbootcampcapstonepipelineCodeBuildActionRole4F3DE8DA",
+          "Arn"
+         ]
+        },
+        "RunOrder": 1
+       }
+      ],
+      "Name": "Build"
+     },
+     {
+      "Actions": [
+       {
+        "ActionTypeId": {
+         "Category": "Build",
+         "Owner": "AWS",
+         "Provider": "CodeBuild",
+         "Version": "1"
+        },
+        "Configuration": {
+         "ProjectName": {
+          "Ref": "eksbootcampcapstonepipelineUpdatePipelineSelfMutation21E1FA7A"
+         },
+         "EnvironmentVariables": "[{\"name\":\"_PROJECT_CONFIG_HASH\",\"type\":\"PLAINTEXT\",\"value\":\"07127f775d55661919b6c962076d6844173cd42e1301906e0e5225d6cf279d61\"}]"
+        },
+        "InputArtifacts": [
+         {
+          "Name": "eks_bootcamp_capstone_pipeline_synth_Output"
+         }
+        ],
+        "Name": "SelfMutate",
+        "RoleArn": {
+         "Fn::GetAtt": [
+          "eksbootcampcapstonepipelineCodeBuildActionRole4F3DE8DA",
+          "Arn"
+         ]
+        },
+        "RunOrder": 1
+       }
+      ],
+      "Name": "UpdatePipeline"
+     },
+     {
+      "Actions": [
+       {
+        "ActionTypeId": {
+         "Category": "Build",
+         "Owner": "AWS",
+         "Provider": "CodeBuild",
+         "Version": "1"
+        },
+        "Configuration": {
+         "ProjectName": {
+          "Ref": "eksbootcampcapstonepipelineAssetsFileAsset17B85D660"
+         }
+        },
+        "InputArtifacts": [
+         {
+          "Name": "eks_bootcamp_capstone_pipeline_synth_Output"
+         }
+        ],
+        "Name": "FileAsset1",
+        "RoleArn": {
+         "Fn::GetAtt": [
+          "eksbootcampcapstonepipelineCodeBuildActionRole4F3DE8DA",
+          "Arn"
+         ]
+        },
+        "RunOrder": 1
+       },
+       {
+        "ActionTypeId": {
+         "Category": "Build",
+         "Owner": "AWS",
+         "Provider": "CodeBuild",
+         "Version": "1"
+        },
+        "Configuration": {
+         "ProjectName": {
+          "Ref": "eksbootcampcapstonepipelineAssetsFileAsset10C42346B6"
+         }
+        },
+        "InputArtifacts": [
+         {
+          "Name": "eks_bootcamp_capstone_pipeline_synth_Output"
+         }
+        ],
+        "Name": "FileAsset10",
+        "RoleArn": {
+         "Fn::GetAtt": [
+          "eksbootcampcapstonepipelineCodeBuildActionRole4F3DE8DA",
+          "Arn"
+         ]
+        },
+        "RunOrder": 1
+       },
+       {
+        "ActionTypeId": {
+         "Category": "Build",
+         "Owner": "AWS",
+         "Provider": "CodeBuild",
+         "Version": "1"
+        },
+        "Configuration": {
+         "ProjectName": {
+          "Ref": "eksbootcampcapstonepipelineAssetsFileAsset111BA9C42B"
+         }
+        },
+        "InputArtifacts": [
+         {
+          "Name": "eks_bootcamp_capstone_pipeline_synth_Output"
+         }
+        ],
+        "Name": "FileAsset11",
+        "RoleArn": {
+         "Fn::GetAtt": [
+          "eksbootcampcapstonepipelineCodeBuildActionRole4F3DE8DA",
+          "Arn"
+         ]
+        },
+        "RunOrder": 1
+       },
+       {
+        "ActionTypeId": {
+         "Category": "Build",
+         "Owner": "AWS",
+         "Provider": "CodeBuild",
+         "Version": "1"
+        },
+        "Configuration": {
+         "ProjectName": {
+          "Ref": "eksbootcampcapstonepipelineAssetsFileAsset1228B31C1E"
+         }
+        },
+        "InputArtifacts": [
+         {
+          "Name": "eks_bootcamp_capstone_pipeline_synth_Output"
+         }
+        ],
+        "Name": "FileAsset12",
+        "RoleArn": {
+         "Fn::GetAtt": [
+          "eksbootcampcapstonepipelineCodeBuildActionRole4F3DE8DA",
+          "Arn"
+         ]
+        },
+        "RunOrder": 1
+       },
+       {
+        "ActionTypeId": {
+         "Category": "Build",
+         "Owner": "AWS",
+         "Provider": "CodeBuild",
+         "Version": "1"
+        },
+        "Configuration": {
+         "ProjectName": {
+          "Ref": "eksbootcampcapstonepipelineAssetsFileAsset20FE0A53C"
+         }
+        },
+        "InputArtifacts": [
+         {
+          "Name": "eks_bootcamp_capstone_pipeline_synth_Output"
+         }
+        ],
+        "Name": "FileAsset2",
+        "RoleArn": {
+         "Fn::GetAtt": [
+          "eksbootcampcapstonepipelineCodeBuildActionRole4F3DE8DA",
+          "Arn"
+         ]
+        },
+        "RunOrder": 1
+       },
+       {
+        "ActionTypeId": {
+         "Category": "Build",
+         "Owner": "AWS",
+         "Provider": "CodeBuild",
+         "Version": "1"
+        },
+        "Configuration": {
+         "ProjectName": {
+          "Ref": "eksbootcampcapstonepipelineAssetsFileAsset320452D28"
+         }
+        },
+        "InputArtifacts": [
+         {
+          "Name": "eks_bootcamp_capstone_pipeline_synth_Output"
+         }
+        ],
+        "Name": "FileAsset3",
+        "RoleArn": {
+         "Fn::GetAtt": [
+          "eksbootcampcapstonepipelineCodeBuildActionRole4F3DE8DA",
+          "Arn"
+         ]
+        },
+        "RunOrder": 1
+       },
+       {
+        "ActionTypeId": {
+         "Category": "Build",
+         "Owner": "AWS",
+         "Provider": "CodeBuild",
+         "Version": "1"
+        },
+        "Configuration": {
+         "ProjectName": {
+          "Ref": "eksbootcampcapstonepipelineAssetsFileAsset42AA0D43C"
+         }
+        },
+        "InputArtifacts": [
+         {
+          "Name": "eks_bootcamp_capstone_pipeline_synth_Output"
+         }
+        ],
+        "Name": "FileAsset4",
+        "RoleArn": {
+         "Fn::GetAtt": [
+          "eksbootcampcapstonepipelineCodeBuildActionRole4F3DE8DA",
+          "Arn"
+         ]
+        },
+        "RunOrder": 1
+       },
+       {
+        "ActionTypeId": {
+         "Category": "Build",
+         "Owner": "AWS",
+         "Provider": "CodeBuild",
+         "Version": "1"
+        },
+        "Configuration": {
+         "ProjectName": {
+          "Ref": "eksbootcampcapstonepipelineAssetsFileAsset5B36A49D5"
+         }
+        },
+        "InputArtifacts": [
+         {
+          "Name": "eks_bootcamp_capstone_pipeline_synth_Output"
+         }
+        ],
+        "Name": "FileAsset5",
+        "RoleArn": {
+         "Fn::GetAtt": [
+          "eksbootcampcapstonepipelineCodeBuildActionRole4F3DE8DA",
+          "Arn"
+         ]
+        },
+        "RunOrder": 1
+       },
+       {
+        "ActionTypeId": {
+         "Category": "Build",
+         "Owner": "AWS",
+         "Provider": "CodeBuild",
+         "Version": "1"
+        },
+        "Configuration": {
+         "ProjectName": {
+          "Ref": "eksbootcampcapstonepipelineAssetsFileAsset64C816957"
+         }
+        },
+        "InputArtifacts": [
+         {
+          "Name": "eks_bootcamp_capstone_pipeline_synth_Output"
+         }
+        ],
+        "Name": "FileAsset6",
+        "RoleArn": {
+         "Fn::GetAtt": [
+          "eksbootcampcapstonepipelineCodeBuildActionRole4F3DE8DA",
+          "Arn"
+         ]
+        },
+        "RunOrder": 1
+       },
+       {
+        "ActionTypeId": {
+         "Category": "Build",
+         "Owner": "AWS",
+         "Provider": "CodeBuild",
+         "Version": "1"
+        },
+        "Configuration": {
+         "ProjectName": {
+          "Ref": "eksbootcampcapstonepipelineAssetsFileAsset730AF1152"
+         }
+        },
+        "InputArtifacts": [
+         {
+          "Name": "eks_bootcamp_capstone_pipeline_synth_Output"
+         }
+        ],
+        "Name": "FileAsset7",
+        "RoleArn": {
+         "Fn::GetAtt": [
+          "eksbootcampcapstonepipelineCodeBuildActionRole4F3DE8DA",
+          "Arn"
+         ]
+        },
+        "RunOrder": 1
+       },
+       {
+        "ActionTypeId": {
+         "Category": "Build",
+         "Owner": "AWS",
+         "Provider": "CodeBuild",
+         "Version": "1"
+        },
+        "Configuration": {
+         "ProjectName": {
+          "Ref": "eksbootcampcapstonepipelineAssetsFileAsset8AA0A2CC6"
+         }
+        },
+        "InputArtifacts": [
+         {
+          "Name": "eks_bootcamp_capstone_pipeline_synth_Output"
+         }
+        ],
+        "Name": "FileAsset8",
+        "RoleArn": {
+         "Fn::GetAtt": [
+          "eksbootcampcapstonepipelineCodeBuildActionRole4F3DE8DA",
+          "Arn"
+         ]
+        },
+        "RunOrder": 1
+       },
+       {
+        "ActionTypeId": {
+         "Category": "Build",
+         "Owner": "AWS",
+         "Provider": "CodeBuild",
+         "Version": "1"
+        },
+        "Configuration": {
+         "ProjectName": {
+          "Ref": "eksbootcampcapstonepipelineAssetsFileAsset9450B2E4C"
+         }
+        },
+        "InputArtifacts": [
+         {
+          "Name": "eks_bootcamp_capstone_pipeline_synth_Output"
+         }
+        ],
+        "Name": "FileAsset9",
+        "RoleArn": {
+         "Fn::GetAtt": [
+          "eksbootcampcapstonepipelineCodeBuildActionRole4F3DE8DA",
+          "Arn"
+         ]
+        },
+        "RunOrder": 1
+       }
+      ],
+      "Name": "Assets"
+     },
+     {
+      "Actions": [
+       {
+        "ActionTypeId": {
+         "Category": "Deploy",
+         "Owner": "AWS",
+         "Provider": "CloudFormation",
+         "Version": "1"
+        },
+        "Configuration": {
+         "StackName": "dev-dev-blueprint",
+         "Capabilities": "CAPABILITY_NAMED_IAM,CAPABILITY_AUTO_EXPAND",
+         "RoleArn": {
+          "Fn::Join": [
+           "",
+           [
+            "arn:",
+            {
+             "Ref": "AWS::Partition"
+            },
+            ":iam::966339691353:role/cdk-hnb659fds-cfn-exec-role-966339691353-us-west-2"
+           ]
+          ]
+         },
+         "ActionMode": "CHANGE_SET_REPLACE",
+         "ChangeSetName": "PipelineChange",
+         "TemplatePath": "eks_bootcamp_capstone_pipeline_synth_Output::assembly-pipeline-stack-dev/pipelinestackdevdevblueprint82F6F6D4.template.json"
+        },
+        "InputArtifacts": [
+         {
+          "Name": "eks_bootcamp_capstone_pipeline_synth_Output"
+         }
+        ],
+        "Name": "dev.dev-blueprint.Prepare",
+        "RoleArn": {
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":iam::966339691353:role/cdk-hnb659fds-deploy-role-966339691353-us-west-2"
+          ]
+         ]
+        },
+        "RunOrder": 1
+       },
+       {
+        "ActionTypeId": {
+         "Category": "Deploy",
+         "Owner": "AWS",
+         "Provider": "CloudFormation",
+         "Version": "1"
+        },
+        "Configuration": {
+         "StackName": "test-test-blueprint",
+         "Capabilities": "CAPABILITY_NAMED_IAM,CAPABILITY_AUTO_EXPAND",
+         "RoleArn": {
+          "Fn::Join": [
+           "",
+           [
+            "arn:",
+            {
+             "Ref": "AWS::Partition"
+            },
+            ":iam::966339691353:role/cdk-hnb659fds-cfn-exec-role-966339691353-us-east-2"
+           ]
+          ]
+         },
+         "ActionMode": "CHANGE_SET_REPLACE",
+         "ChangeSetName": "PipelineChange",
+         "TemplatePath": "eks_bootcamp_capstone_pipeline_synth_Output::assembly-pipeline-stack-test/pipelinestacktesttestblueprint4D1A78D7.template.json"
+        },
+        "InputArtifacts": [
+         {
+          "Name": "eks_bootcamp_capstone_pipeline_synth_Output"
+         }
+        ],
+        "Name": "test.test-blueprint.Prepare",
+        "Region": "us-east-2",
+        "RoleArn": {
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":iam::966339691353:role/cdk-hnb659fds-deploy-role-966339691353-us-east-2"
+          ]
+         ]
+        },
+        "RunOrder": 1
+       },
+       {
+        "ActionTypeId": {
+         "Category": "Deploy",
+         "Owner": "AWS",
+         "Provider": "CloudFormation",
+         "Version": "1"
+        },
+        "Configuration": {
+         "StackName": "prod-prod-blueprint",
+         "Capabilities": "CAPABILITY_NAMED_IAM,CAPABILITY_AUTO_EXPAND",
+         "RoleArn": {
+          "Fn::Join": [
+           "",
+           [
+            "arn:",
+            {
+             "Ref": "AWS::Partition"
+            },
+            ":iam::966339691353:role/cdk-hnb659fds-cfn-exec-role-966339691353-us-east-1"
+           ]
+          ]
+         },
+         "ActionMode": "CHANGE_SET_REPLACE",
+         "ChangeSetName": "PipelineChange",
+         "TemplatePath": "eks_bootcamp_capstone_pipeline_synth_Output::assembly-pipeline-stack-prod/pipelinestackprodprodblueprintB3337379.template.json"
+        },
+        "InputArtifacts": [
+         {
+          "Name": "eks_bootcamp_capstone_pipeline_synth_Output"
+         }
+        ],
+        "Name": "prod.prod-blueprint.Prepare",
+        "Region": "us-east-1",
+        "RoleArn": {
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":iam::966339691353:role/cdk-hnb659fds-deploy-role-966339691353-us-east-1"
+          ]
+         ]
+        },
+        "RunOrder": 1
+       },
+       {
+        "ActionTypeId": {
+         "Category": "Deploy",
+         "Owner": "AWS",
+         "Provider": "CloudFormation",
+         "Version": "1"
+        },
+        "Configuration": {
+         "StackName": "dev-dev-blueprint",
+         "ActionMode": "CHANGE_SET_EXECUTE",
+         "ChangeSetName": "PipelineChange"
+        },
+        "Name": "dev.dev-blueprint.Deploy",
+        "RoleArn": {
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":iam::966339691353:role/cdk-hnb659fds-deploy-role-966339691353-us-west-2"
+          ]
+         ]
+        },
+        "RunOrder": 2
+       },
+       {
+        "ActionTypeId": {
+         "Category": "Deploy",
+         "Owner": "AWS",
+         "Provider": "CloudFormation",
+         "Version": "1"
+        },
+        "Configuration": {
+         "StackName": "test-test-blueprint",
+         "ActionMode": "CHANGE_SET_EXECUTE",
+         "ChangeSetName": "PipelineChange"
+        },
+        "Name": "test.test-blueprint.Deploy",
+        "Region": "us-east-2",
+        "RoleArn": {
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":iam::966339691353:role/cdk-hnb659fds-deploy-role-966339691353-us-east-2"
+          ]
+         ]
+        },
+        "RunOrder": 2
+       },
+       {
+        "ActionTypeId": {
+         "Category": "Deploy",
+         "Owner": "AWS",
+         "Provider": "CloudFormation",
+         "Version": "1"
+        },
+        "Configuration": {
+         "StackName": "prod-prod-blueprint",
+         "ActionMode": "CHANGE_SET_EXECUTE",
+         "ChangeSetName": "PipelineChange"
+        },
+        "Name": "prod.prod-blueprint.Deploy",
+        "Region": "us-east-1",
+        "RoleArn": {
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":iam::966339691353:role/cdk-hnb659fds-deploy-role-966339691353-us-east-1"
+          ]
+         ]
+        },
+        "RunOrder": 2
+       }
+      ],
+      "Name": "envs"
+     }
+    ],
+    "ArtifactStores": [
+     {
+      "ArtifactStore": {
+       "Location": "pipeline-stack-support-useplicationbucket1ca69a6cecd73fab93da",
+       "Type": "S3"
+      },
+      "Region": "us-east-2"
+     },
+     {
+      "ArtifactStore": {
+       "Location": "pipeline-stack-support-useplicationbucket65b68dcf9a4e218ea2e8",
+       "Type": "S3"
+      },
+      "Region": "us-east-1"
+     },
+     {
+      "ArtifactStore": {
+       "Location": {
+        "Ref": "eksbootcampcapstonepipelinePipelineArtifactsBucket4EAADD3B"
+       },
+       "Type": "S3"
+      },
+      "Region": "us-west-2"
+     }
+    ],
+    "Name": "eks-bootcamp-capstone-pipeline",
+    "RestartExecutionOnUpdate": true
+   },
+   "DependsOn": [
+    "eksbootcampcapstonepipelinePipelineRoleDefaultPolicyB1AA4F4C",
+    "eksbootcampcapstonepipelinePipelineRole2EC368C7"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "pipeline-stack/eks-bootcamp-capstone-pipeline/Pipeline/Resource"
+   }
+  },
+  "eksbootcampcapstonepipelinePipelineSourcebosquueksbootcampcapstoneWebhookResource98EC77D0": {
+   "Type": "AWS::CodePipeline::Webhook",
+   "Properties": {
+    "Authentication": "GITHUB_HMAC",
+    "AuthenticationConfiguration": {
+     "SecretToken": "{{resolve:secretsmanager:github-token-capstone:SecretString:::}}"
+    },
+    "Filters": [
+     {
+      "JsonPath": "$.ref",
+      "MatchEquals": "refs/heads/{Branch}"
+     }
+    ],
+    "TargetAction": "bosquu_eks-bootcamp-capstone",
+    "TargetPipeline": {
+     "Ref": "eksbootcampcapstonepipelinePipeline5DCA41A7"
+    },
+    "TargetPipelineVersion": 1,
+    "RegisterWithThirdParty": true
+   },
+   "Metadata": {
+    "aws:cdk:path": "pipeline-stack/eks-bootcamp-capstone-pipeline/Pipeline/Source/bosquu_eks-bootcamp-capstone/WebhookResource"
+   }
+  },
+  "eksbootcampcapstonepipelinePipelineBuildeksbootcampcapstonepipelinesynthCdkBuildProjectRole89EDD8CC": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "codebuild.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "pipeline-stack/eks-bootcamp-capstone-pipeline/Pipeline/Build/eks-bootcamp-capstone-pipeline-synth/CdkBuildProject/Role/Resource"
+   }
+  },
+  "eksbootcampcapstonepipelinePipelineBuildeksbootcampcapstonepipelinesynthCdkBuildProjectRoleDefaultPolicy8246E50B": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "logs:CreateLogGroup",
+        "logs:CreateLogStream",
+        "logs:PutLogEvents"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":logs:us-west-2:966339691353:log-group:/aws/codebuild/",
+           {
+            "Ref": "eksbootcampcapstonepipelinePipelineBuildeksbootcampcapstonepipelinesynthCdkBuildProject1CFE8FA3"
+           },
+           ":*"
+          ]
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":logs:us-west-2:966339691353:log-group:/aws/codebuild/",
+           {
+            "Ref": "eksbootcampcapstonepipelinePipelineBuildeksbootcampcapstonepipelinesynthCdkBuildProject1CFE8FA3"
+           }
+          ]
+         ]
+        }
+       ]
+      },
+      {
+       "Action": [
+        "codebuild:BatchPutCodeCoverages",
+        "codebuild:BatchPutTestCases",
+        "codebuild:CreateReport",
+        "codebuild:CreateReportGroup",
+        "codebuild:UpdateReport"
+       ],
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::Join": [
+         "",
+         [
+          "arn:",
+          {
+           "Ref": "AWS::Partition"
+          },
+          ":codebuild:us-west-2:966339691353:report-group/",
+          {
+           "Ref": "eksbootcampcapstonepipelinePipelineBuildeksbootcampcapstonepipelinesynthCdkBuildProject1CFE8FA3"
+          },
+          "-*"
+         ]
+        ]
+       }
+      },
+      {
+       "Action": [
+        "s3:Abort*",
+        "s3:DeleteObject*",
+        "s3:GetBucket*",
+        "s3:GetObject*",
+        "s3:List*",
+        "s3:PutObject",
+        "s3:PutObjectLegalHold",
+        "s3:PutObjectRetention",
+        "s3:PutObjectTagging",
+        "s3:PutObjectVersionTagging"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "eksbootcampcapstonepipelinePipelineArtifactsBucket4EAADD3B",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "eksbootcampcapstonepipelinePipelineArtifactsBucket4EAADD3B",
+             "Arn"
+            ]
+           },
+           "/*"
+          ]
+         ]
+        }
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "eksbootcampcapstonepipelinePipelineBuildeksbootcampcapstonepipelinesynthCdkBuildProjectRoleDefaultPolicy8246E50B",
+    "Roles": [
+     {
+      "Ref": "eksbootcampcapstonepipelinePipelineBuildeksbootcampcapstonepipelinesynthCdkBuildProjectRole89EDD8CC"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "pipeline-stack/eks-bootcamp-capstone-pipeline/Pipeline/Build/eks-bootcamp-capstone-pipeline-synth/CdkBuildProject/Role/DefaultPolicy/Resource"
+   }
+  },
+  "eksbootcampcapstonepipelinePipelineBuildeksbootcampcapstonepipelinesynthCdkBuildProject1CFE8FA3": {
+   "Type": "AWS::CodeBuild::Project",
+   "Properties": {
+    "Artifacts": {
+     "Type": "CODEPIPELINE"
+    },
+    "Environment": {
+     "ComputeType": "BUILD_GENERAL1_SMALL",
+     "Image": "aws/codebuild/standard:5.0",
+     "ImagePullCredentialsType": "CODEBUILD",
+     "PrivilegedMode": false,
+     "Type": "LINUX_CONTAINER"
+    },
+    "ServiceRole": {
+     "Fn::GetAtt": [
+      "eksbootcampcapstonepipelinePipelineBuildeksbootcampcapstonepipelinesynthCdkBuildProjectRole89EDD8CC",
+      "Arn"
+     ]
+    },
+    "Source": {
+     "BuildSpec": "{\n  \"version\": \"0.2\",\n  \"phases\": {\n    \"install\": {\n      \"commands\": [\n        \"npm install --global npm\",\n        \"npm install -g aws-cdk@2.37.1\",\n        \"npm install\"\n      ]\n    },\n    \"build\": {\n      \"commands\": [\n        \"npm run build\",\n        \"npx cdk synth\"\n      ]\n    }\n  },\n  \"artifacts\": {\n    \"base-directory\": \"cdk.out\",\n    \"files\": \"**/*\"\n  }\n}",
+     "Type": "CODEPIPELINE"
+    },
+    "Cache": {
+     "Type": "NO_CACHE"
+    },
+    "Description": "Pipeline step pipeline-stack/Pipeline/Build/eks-bootcamp-capstone-pipeline-synth",
+    "EncryptionKey": "alias/aws/s3"
+   },
+   "Metadata": {
+    "aws:cdk:path": "pipeline-stack/eks-bootcamp-capstone-pipeline/Pipeline/Build/eks-bootcamp-capstone-pipeline-synth/CdkBuildProject/Resource"
+   }
+  },
+  "eksbootcampcapstonepipelineCodeBuildActionRole4F3DE8DA": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Condition": {
+        "Bool": {
+         "aws:ViaAWSService": "codepipeline.amazonaws.com"
+        }
+       },
+       "Effect": "Allow",
+       "Principal": {
+        "AWS": {
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":iam::966339691353:root"
+          ]
+         ]
+        }
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "pipeline-stack/eks-bootcamp-capstone-pipeline/CodeBuildActionRole/Resource"
+   }
+  },
+  "eksbootcampcapstonepipelineCodeBuildActionRoleDefaultPolicyC8140E2B": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "codebuild:BatchGetBuilds",
+        "codebuild:StartBuild",
+        "codebuild:StopBuild"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "eksbootcampcapstonepipelineAssetsFileAsset10C42346B6",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::GetAtt": [
+          "eksbootcampcapstonepipelineAssetsFileAsset111BA9C42B",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::GetAtt": [
+          "eksbootcampcapstonepipelineAssetsFileAsset1228B31C1E",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::GetAtt": [
+          "eksbootcampcapstonepipelineAssetsFileAsset17B85D660",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::GetAtt": [
+          "eksbootcampcapstonepipelineAssetsFileAsset20FE0A53C",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::GetAtt": [
+          "eksbootcampcapstonepipelineAssetsFileAsset320452D28",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::GetAtt": [
+          "eksbootcampcapstonepipelineAssetsFileAsset42AA0D43C",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::GetAtt": [
+          "eksbootcampcapstonepipelineAssetsFileAsset5B36A49D5",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::GetAtt": [
+          "eksbootcampcapstonepipelineAssetsFileAsset64C816957",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::GetAtt": [
+          "eksbootcampcapstonepipelineAssetsFileAsset730AF1152",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::GetAtt": [
+          "eksbootcampcapstonepipelineAssetsFileAsset8AA0A2CC6",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::GetAtt": [
+          "eksbootcampcapstonepipelineAssetsFileAsset9450B2E4C",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::GetAtt": [
+          "eksbootcampcapstonepipelinePipelineBuildeksbootcampcapstonepipelinesynthCdkBuildProject1CFE8FA3",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::GetAtt": [
+          "eksbootcampcapstonepipelineUpdatePipelineSelfMutation21E1FA7A",
+          "Arn"
+         ]
+        }
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "eksbootcampcapstonepipelineCodeBuildActionRoleDefaultPolicyC8140E2B",
+    "Roles": [
+     {
+      "Ref": "eksbootcampcapstonepipelineCodeBuildActionRole4F3DE8DA"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "pipeline-stack/eks-bootcamp-capstone-pipeline/CodeBuildActionRole/DefaultPolicy/Resource"
+   }
+  },
+  "eksbootcampcapstonepipelineUpdatePipelineSelfMutationRoleD2659468": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "codebuild.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "pipeline-stack/eks-bootcamp-capstone-pipeline/UpdatePipeline/SelfMutation/Role/Resource"
+   }
+  },
+  "eksbootcampcapstonepipelineUpdatePipelineSelfMutationRoleDefaultPolicy9545A501": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "logs:CreateLogGroup",
+        "logs:CreateLogStream",
+        "logs:PutLogEvents"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":logs:us-west-2:966339691353:log-group:/aws/codebuild/",
+           {
+            "Ref": "eksbootcampcapstonepipelineUpdatePipelineSelfMutation21E1FA7A"
+           },
+           ":*"
+          ]
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":logs:us-west-2:966339691353:log-group:/aws/codebuild/",
+           {
+            "Ref": "eksbootcampcapstonepipelineUpdatePipelineSelfMutation21E1FA7A"
+           }
+          ]
+         ]
+        }
+       ]
+      },
+      {
+       "Action": [
+        "codebuild:BatchPutCodeCoverages",
+        "codebuild:BatchPutTestCases",
+        "codebuild:CreateReport",
+        "codebuild:CreateReportGroup",
+        "codebuild:UpdateReport"
+       ],
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::Join": [
+         "",
+         [
+          "arn:",
+          {
+           "Ref": "AWS::Partition"
+          },
+          ":codebuild:us-west-2:966339691353:report-group/",
+          {
+           "Ref": "eksbootcampcapstonepipelineUpdatePipelineSelfMutation21E1FA7A"
+          },
+          "-*"
+         ]
+        ]
+       }
+      },
+      {
+       "Action": "sts:AssumeRole",
+       "Condition": {
+        "ForAnyValue:StringEquals": {
+         "iam:ResourceTag/aws-cdk:bootstrap-role": [
+          "image-publishing",
+          "file-publishing",
+          "deploy"
+         ]
+        }
+       },
+       "Effect": "Allow",
+       "Resource": "arn:*:iam::966339691353:role/*"
+      },
+      {
+       "Action": [
+        "cloudformation:DescribeStacks",
+        "s3:ListBucket"
+       ],
+       "Effect": "Allow",
+       "Resource": "*"
+      },
+      {
+       "Action": [
+        "s3:GetBucket*",
+        "s3:GetObject*",
+        "s3:List*"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "eksbootcampcapstonepipelinePipelineArtifactsBucket4EAADD3B",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "eksbootcampcapstonepipelinePipelineArtifactsBucket4EAADD3B",
+             "Arn"
+            ]
+           },
+           "/*"
+          ]
+         ]
+        }
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "eksbootcampcapstonepipelineUpdatePipelineSelfMutationRoleDefaultPolicy9545A501",
+    "Roles": [
+     {
+      "Ref": "eksbootcampcapstonepipelineUpdatePipelineSelfMutationRoleD2659468"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "pipeline-stack/eks-bootcamp-capstone-pipeline/UpdatePipeline/SelfMutation/Role/DefaultPolicy/Resource"
+   }
+  },
+  "eksbootcampcapstonepipelineUpdatePipelineSelfMutation21E1FA7A": {
+   "Type": "AWS::CodeBuild::Project",
+   "Properties": {
+    "Artifacts": {
+     "Type": "CODEPIPELINE"
+    },
+    "Environment": {
+     "ComputeType": "BUILD_GENERAL1_SMALL",
+     "Image": "aws/codebuild/standard:5.0",
+     "ImagePullCredentialsType": "CODEBUILD",
+     "PrivilegedMode": false,
+     "Type": "LINUX_CONTAINER"
+    },
+    "ServiceRole": {
+     "Fn::GetAtt": [
+      "eksbootcampcapstonepipelineUpdatePipelineSelfMutationRoleD2659468",
+      "Arn"
+     ]
+    },
+    "Source": {
+     "BuildSpec": "{\n  \"version\": \"0.2\",\n  \"phases\": {\n    \"install\": {\n      \"commands\": [\n        \"npm install -g aws-cdk@2\"\n      ]\n    },\n    \"build\": {\n      \"commands\": [\n        \"cdk -a . deploy pipeline-stack --require-approval=never --verbose\"\n      ]\n    }\n  }\n}",
+     "Type": "CODEPIPELINE"
+    },
+    "Cache": {
+     "Type": "NO_CACHE"
+    },
+    "Description": "Pipeline step pipeline-stack/Pipeline/UpdatePipeline/SelfMutate",
+    "EncryptionKey": "alias/aws/s3",
+    "Name": "eks-bootcamp-capstone-pipeline-selfupdate"
+   },
+   "Metadata": {
+    "aws:cdk:path": "pipeline-stack/eks-bootcamp-capstone-pipeline/UpdatePipeline/SelfMutation/Resource"
+   }
+  },
+  "eksbootcampcapstonepipelineAssetsFileRole4F2B7705": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "AWS": {
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":iam::966339691353:root"
+          ]
+         ]
+        },
+        "Service": "codebuild.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "pipeline-stack/eks-bootcamp-capstone-pipeline/Assets/FileRole/Resource"
+   }
+  },
+  "eksbootcampcapstonepipelineAssetsFileRoleDefaultPolicyC3BB782A": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "logs:CreateLogGroup",
+        "logs:CreateLogStream",
+        "logs:PutLogEvents"
+       ],
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::Join": [
+         "",
+         [
+          "arn:",
+          {
+           "Ref": "AWS::Partition"
+          },
+          ":logs:us-west-2:966339691353:log-group:/aws/codebuild/*"
+         ]
+        ]
+       }
+      },
+      {
+       "Action": [
+        "codebuild:BatchPutCodeCoverages",
+        "codebuild:BatchPutTestCases",
+        "codebuild:CreateReport",
+        "codebuild:CreateReportGroup",
+        "codebuild:UpdateReport"
+       ],
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::Join": [
+         "",
+         [
+          "arn:",
+          {
+           "Ref": "AWS::Partition"
+          },
+          ":codebuild:us-west-2:966339691353:report-group/*"
+         ]
+        ]
+       }
+      },
+      {
+       "Action": [
+        "codebuild:BatchGetBuilds",
+        "codebuild:StartBuild",
+        "codebuild:StopBuild"
+       ],
+       "Effect": "Allow",
+       "Resource": "*"
+      },
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::Sub": "arn:${AWS::Partition}:iam::966339691353:role/cdk-hnb659fds-file-publishing-role-966339691353-us-east-1"
+        },
+        {
+         "Fn::Sub": "arn:${AWS::Partition}:iam::966339691353:role/cdk-hnb659fds-file-publishing-role-966339691353-us-east-2"
+        },
+        {
+         "Fn::Sub": "arn:${AWS::Partition}:iam::966339691353:role/cdk-hnb659fds-file-publishing-role-966339691353-us-west-2"
+        }
+       ]
+      },
+      {
+       "Action": [
+        "s3:GetBucket*",
+        "s3:GetObject*",
+        "s3:List*"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "eksbootcampcapstonepipelinePipelineArtifactsBucket4EAADD3B",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "eksbootcampcapstonepipelinePipelineArtifactsBucket4EAADD3B",
+             "Arn"
+            ]
+           },
+           "/*"
+          ]
+         ]
+        }
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "eksbootcampcapstonepipelineAssetsFileRoleDefaultPolicyC3BB782A",
+    "Roles": [
+     {
+      "Ref": "eksbootcampcapstonepipelineAssetsFileRole4F2B7705"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "pipeline-stack/eks-bootcamp-capstone-pipeline/Assets/FileRole/DefaultPolicy/Resource"
+   }
+  },
+  "eksbootcampcapstonepipelineAssetsFileAsset17B85D660": {
+   "Type": "AWS::CodeBuild::Project",
+   "Properties": {
+    "Artifacts": {
+     "Type": "CODEPIPELINE"
+    },
+    "Environment": {
+     "ComputeType": "BUILD_GENERAL1_SMALL",
+     "Image": "aws/codebuild/standard:5.0",
+     "ImagePullCredentialsType": "CODEBUILD",
+     "PrivilegedMode": false,
+     "Type": "LINUX_CONTAINER"
+    },
+    "ServiceRole": {
+     "Fn::GetAtt": [
+      "eksbootcampcapstonepipelineAssetsFileRole4F2B7705",
+      "Arn"
+     ]
+    },
+    "Source": {
+     "BuildSpec": "{\n  \"version\": \"0.2\",\n  \"phases\": {\n    \"install\": {\n      \"commands\": [\n        \"npm install -g cdk-assets@2\"\n      ]\n    },\n    \"build\": {\n      \"commands\": [\n        \"cdk-assets --path \\\"assembly-pipeline-stack-dev/pipelinestackdevdevblueprint82F6F6D4.assets.json\\\" --verbose publish \\\"4288ebb3652acdf2d828b7db7ca44a7162a401ace50ebb4026e84b18a02a06ee:966339691353-us-west-2\\\"\",\n        \"cdk-assets --path \\\"assembly-pipeline-stack-test/pipelinestacktesttestblueprint4D1A78D7.assets.json\\\" --verbose publish \\\"4288ebb3652acdf2d828b7db7ca44a7162a401ace50ebb4026e84b18a02a06ee:966339691353-us-east-2\\\"\",\n        \"cdk-assets --path \\\"assembly-pipeline-stack-prod/pipelinestackprodprodblueprintB3337379.assets.json\\\" --verbose publish \\\"4288ebb3652acdf2d828b7db7ca44a7162a401ace50ebb4026e84b18a02a06ee:966339691353-us-east-1\\\"\"\n      ]\n    }\n  }\n}",
+     "Type": "CODEPIPELINE"
+    },
+    "Cache": {
+     "Type": "NO_CACHE"
+    },
+    "Description": "Pipeline step pipeline-stack/Pipeline/Assets/FileAsset1",
+    "EncryptionKey": "alias/aws/s3"
+   },
+   "Metadata": {
+    "aws:cdk:path": "pipeline-stack/eks-bootcamp-capstone-pipeline/Assets/FileAsset1/Resource"
+   }
+  },
+  "eksbootcampcapstonepipelineAssetsFileAsset10C42346B6": {
+   "Type": "AWS::CodeBuild::Project",
+   "Properties": {
+    "Artifacts": {
+     "Type": "CODEPIPELINE"
+    },
+    "Environment": {
+     "ComputeType": "BUILD_GENERAL1_SMALL",
+     "Image": "aws/codebuild/standard:5.0",
+     "ImagePullCredentialsType": "CODEBUILD",
+     "PrivilegedMode": false,
+     "Type": "LINUX_CONTAINER"
+    },
+    "ServiceRole": {
+     "Fn::GetAtt": [
+      "eksbootcampcapstonepipelineAssetsFileRole4F2B7705",
+      "Arn"
+     ]
+    },
+    "Source": {
+     "BuildSpec": "{\n  \"version\": \"0.2\",\n  \"phases\": {\n    \"install\": {\n      \"commands\": [\n        \"npm install -g cdk-assets@2\"\n      ]\n    },\n    \"build\": {\n      \"commands\": [\n        \"cdk-assets --path \\\"assembly-pipeline-stack-test/pipelinestacktesttestblueprint4D1A78D7.assets.json\\\" --verbose publish \\\"0a5eac478380ff9daab1530c573517bd1a9b178a9eb9aea77d6de66ded6f256f:966339691353-us-east-2\\\"\"\n      ]\n    }\n  }\n}",
+     "Type": "CODEPIPELINE"
+    },
+    "Cache": {
+     "Type": "NO_CACHE"
+    },
+    "Description": "Pipeline step pipeline-stack/Pipeline/Assets/FileAsset10",
+    "EncryptionKey": "alias/aws/s3"
+   },
+   "Metadata": {
+    "aws:cdk:path": "pipeline-stack/eks-bootcamp-capstone-pipeline/Assets/FileAsset10/Resource"
+   }
+  },
+  "eksbootcampcapstonepipelineAssetsFileAsset111BA9C42B": {
+   "Type": "AWS::CodeBuild::Project",
+   "Properties": {
+    "Artifacts": {
+     "Type": "CODEPIPELINE"
+    },
+    "Environment": {
+     "ComputeType": "BUILD_GENERAL1_SMALL",
+     "Image": "aws/codebuild/standard:5.0",
+     "ImagePullCredentialsType": "CODEBUILD",
+     "PrivilegedMode": false,
+     "Type": "LINUX_CONTAINER"
+    },
+    "ServiceRole": {
+     "Fn::GetAtt": [
+      "eksbootcampcapstonepipelineAssetsFileRole4F2B7705",
+      "Arn"
+     ]
+    },
+    "Source": {
+     "BuildSpec": "{\n  \"version\": \"0.2\",\n  \"phases\": {\n    \"install\": {\n      \"commands\": [\n        \"npm install -g cdk-assets@2\"\n      ]\n    },\n    \"build\": {\n      \"commands\": [\n        \"cdk-assets --path \\\"assembly-pipeline-stack-prod/pipelinestackprodprodblueprintB3337379.assets.json\\\" --verbose publish \\\"e6398e54132bd4d1138c1562062ba6d135a39e2b478a17121c00a8bba1066809:966339691353-us-east-1\\\"\"\n      ]\n    }\n  }\n}",
+     "Type": "CODEPIPELINE"
+    },
+    "Cache": {
+     "Type": "NO_CACHE"
+    },
+    "Description": "Pipeline step pipeline-stack/Pipeline/Assets/FileAsset11",
+    "EncryptionKey": "alias/aws/s3"
+   },
+   "Metadata": {
+    "aws:cdk:path": "pipeline-stack/eks-bootcamp-capstone-pipeline/Assets/FileAsset11/Resource"
+   }
+  },
+  "eksbootcampcapstonepipelineAssetsFileAsset1228B31C1E": {
+   "Type": "AWS::CodeBuild::Project",
+   "Properties": {
+    "Artifacts": {
+     "Type": "CODEPIPELINE"
+    },
+    "Environment": {
+     "ComputeType": "BUILD_GENERAL1_SMALL",
+     "Image": "aws/codebuild/standard:5.0",
+     "ImagePullCredentialsType": "CODEBUILD",
+     "PrivilegedMode": false,
+     "Type": "LINUX_CONTAINER"
+    },
+    "ServiceRole": {
+     "Fn::GetAtt": [
+      "eksbootcampcapstonepipelineAssetsFileRole4F2B7705",
+      "Arn"
+     ]
+    },
+    "Source": {
+     "BuildSpec": "{\n  \"version\": \"0.2\",\n  \"phases\": {\n    \"install\": {\n      \"commands\": [\n        \"npm install -g cdk-assets@2\"\n      ]\n    },\n    \"build\": {\n      \"commands\": [\n        \"cdk-assets --path \\\"assembly-pipeline-stack-prod/pipelinestackprodprodblueprintB3337379.assets.json\\\" --verbose publish \\\"989c09d9b0f3b482c601e5399cffc86096a347a63b6f156dda06fd809af6d419:966339691353-us-east-1\\\"\"\n      ]\n    }\n  }\n}",
+     "Type": "CODEPIPELINE"
+    },
+    "Cache": {
+     "Type": "NO_CACHE"
+    },
+    "Description": "Pipeline step pipeline-stack/Pipeline/Assets/FileAsset12",
+    "EncryptionKey": "alias/aws/s3"
+   },
+   "Metadata": {
+    "aws:cdk:path": "pipeline-stack/eks-bootcamp-capstone-pipeline/Assets/FileAsset12/Resource"
+   }
+  },
+  "eksbootcampcapstonepipelineAssetsFileAsset20FE0A53C": {
+   "Type": "AWS::CodeBuild::Project",
+   "Properties": {
+    "Artifacts": {
+     "Type": "CODEPIPELINE"
+    },
+    "Environment": {
+     "ComputeType": "BUILD_GENERAL1_SMALL",
+     "Image": "aws/codebuild/standard:5.0",
+     "ImagePullCredentialsType": "CODEBUILD",
+     "PrivilegedMode": false,
+     "Type": "LINUX_CONTAINER"
+    },
+    "ServiceRole": {
+     "Fn::GetAtt": [
+      "eksbootcampcapstonepipelineAssetsFileRole4F2B7705",
+      "Arn"
+     ]
+    },
+    "Source": {
+     "BuildSpec": "{\n  \"version\": \"0.2\",\n  \"phases\": {\n    \"install\": {\n      \"commands\": [\n        \"npm install -g cdk-assets@2\"\n      ]\n    },\n    \"build\": {\n      \"commands\": [\n        \"cdk-assets --path \\\"assembly-pipeline-stack-dev/pipelinestackdevdevblueprint82F6F6D4.assets.json\\\" --verbose publish \\\"04a62144012b2cd32474867b1533a36eb328db26f983a17ff81189234aff4705:966339691353-us-west-2\\\"\",\n        \"cdk-assets --path \\\"assembly-pipeline-stack-test/pipelinestacktesttestblueprint4D1A78D7.assets.json\\\" --verbose publish \\\"04a62144012b2cd32474867b1533a36eb328db26f983a17ff81189234aff4705:966339691353-us-east-2\\\"\",\n        \"cdk-assets --path \\\"assembly-pipeline-stack-prod/pipelinestackprodprodblueprintB3337379.assets.json\\\" --verbose publish \\\"04a62144012b2cd32474867b1533a36eb328db26f983a17ff81189234aff4705:966339691353-us-east-1\\\"\"\n      ]\n    }\n  }\n}",
+     "Type": "CODEPIPELINE"
+    },
+    "Cache": {
+     "Type": "NO_CACHE"
+    },
+    "Description": "Pipeline step pipeline-stack/Pipeline/Assets/FileAsset2",
+    "EncryptionKey": "alias/aws/s3"
+   },
+   "Metadata": {
+    "aws:cdk:path": "pipeline-stack/eks-bootcamp-capstone-pipeline/Assets/FileAsset2/Resource"
+   }
+  },
+  "eksbootcampcapstonepipelineAssetsFileAsset320452D28": {
+   "Type": "AWS::CodeBuild::Project",
+   "Properties": {
+    "Artifacts": {
+     "Type": "CODEPIPELINE"
+    },
+    "Environment": {
+     "ComputeType": "BUILD_GENERAL1_SMALL",
+     "Image": "aws/codebuild/standard:5.0",
+     "ImagePullCredentialsType": "CODEBUILD",
+     "PrivilegedMode": false,
+     "Type": "LINUX_CONTAINER"
+    },
+    "ServiceRole": {
+     "Fn::GetAtt": [
+      "eksbootcampcapstonepipelineAssetsFileRole4F2B7705",
+      "Arn"
+     ]
+    },
+    "Source": {
+     "BuildSpec": "{\n  \"version\": \"0.2\",\n  \"phases\": {\n    \"install\": {\n      \"commands\": [\n        \"npm install -g cdk-assets@2\"\n      ]\n    },\n    \"build\": {\n      \"commands\": [\n        \"cdk-assets --path \\\"assembly-pipeline-stack-dev/pipelinestackdevdevblueprint82F6F6D4.assets.json\\\" --verbose publish \\\"e7c95e1a12d903d913ebdd526c735f1ac58b2024882a5562110221fe685ebe85:966339691353-us-west-2\\\"\",\n        \"cdk-assets --path \\\"assembly-pipeline-stack-test/pipelinestacktesttestblueprint4D1A78D7.assets.json\\\" --verbose publish \\\"e7c95e1a12d903d913ebdd526c735f1ac58b2024882a5562110221fe685ebe85:966339691353-us-east-2\\\"\",\n        \"cdk-assets --path \\\"assembly-pipeline-stack-prod/pipelinestackprodprodblueprintB3337379.assets.json\\\" --verbose publish \\\"e7c95e1a12d903d913ebdd526c735f1ac58b2024882a5562110221fe685ebe85:966339691353-us-east-1\\\"\"\n      ]\n    }\n  }\n}",
+     "Type": "CODEPIPELINE"
+    },
+    "Cache": {
+     "Type": "NO_CACHE"
+    },
+    "Description": "Pipeline step pipeline-stack/Pipeline/Assets/FileAsset3",
+    "EncryptionKey": "alias/aws/s3"
+   },
+   "Metadata": {
+    "aws:cdk:path": "pipeline-stack/eks-bootcamp-capstone-pipeline/Assets/FileAsset3/Resource"
+   }
+  },
+  "eksbootcampcapstonepipelineAssetsFileAsset42AA0D43C": {
+   "Type": "AWS::CodeBuild::Project",
+   "Properties": {
+    "Artifacts": {
+     "Type": "CODEPIPELINE"
+    },
+    "Environment": {
+     "ComputeType": "BUILD_GENERAL1_SMALL",
+     "Image": "aws/codebuild/standard:5.0",
+     "ImagePullCredentialsType": "CODEBUILD",
+     "PrivilegedMode": false,
+     "Type": "LINUX_CONTAINER"
+    },
+    "ServiceRole": {
+     "Fn::GetAtt": [
+      "eksbootcampcapstonepipelineAssetsFileRole4F2B7705",
+      "Arn"
+     ]
+    },
+    "Source": {
+     "BuildSpec": "{\n  \"version\": \"0.2\",\n  \"phases\": {\n    \"install\": {\n      \"commands\": [\n        \"npm install -g cdk-assets@2\"\n      ]\n    },\n    \"build\": {\n      \"commands\": [\n        \"cdk-assets --path \\\"assembly-pipeline-stack-dev/pipelinestackdevdevblueprint82F6F6D4.assets.json\\\" --verbose publish \\\"d01d4b7367b49a3e222279017fe50e41d6b2272d436b2e82038d0036deb2cdcb:966339691353-us-west-2\\\"\",\n        \"cdk-assets --path \\\"assembly-pipeline-stack-test/pipelinestacktesttestblueprint4D1A78D7.assets.json\\\" --verbose publish \\\"d01d4b7367b49a3e222279017fe50e41d6b2272d436b2e82038d0036deb2cdcb:966339691353-us-east-2\\\"\",\n        \"cdk-assets --path \\\"assembly-pipeline-stack-prod/pipelinestackprodprodblueprintB3337379.assets.json\\\" --verbose publish \\\"d01d4b7367b49a3e222279017fe50e41d6b2272d436b2e82038d0036deb2cdcb:966339691353-us-east-1\\\"\"\n      ]\n    }\n  }\n}",
+     "Type": "CODEPIPELINE"
+    },
+    "Cache": {
+     "Type": "NO_CACHE"
+    },
+    "Description": "Pipeline step pipeline-stack/Pipeline/Assets/FileAsset4",
+    "EncryptionKey": "alias/aws/s3"
+   },
+   "Metadata": {
+    "aws:cdk:path": "pipeline-stack/eks-bootcamp-capstone-pipeline/Assets/FileAsset4/Resource"
+   }
+  },
+  "eksbootcampcapstonepipelineAssetsFileAsset5B36A49D5": {
+   "Type": "AWS::CodeBuild::Project",
+   "Properties": {
+    "Artifacts": {
+     "Type": "CODEPIPELINE"
+    },
+    "Environment": {
+     "ComputeType": "BUILD_GENERAL1_SMALL",
+     "Image": "aws/codebuild/standard:5.0",
+     "ImagePullCredentialsType": "CODEBUILD",
+     "PrivilegedMode": false,
+     "Type": "LINUX_CONTAINER"
+    },
+    "ServiceRole": {
+     "Fn::GetAtt": [
+      "eksbootcampcapstonepipelineAssetsFileRole4F2B7705",
+      "Arn"
+     ]
+    },
+    "Source": {
+     "BuildSpec": "{\n  \"version\": \"0.2\",\n  \"phases\": {\n    \"install\": {\n      \"commands\": [\n        \"npm install -g cdk-assets@2\"\n      ]\n    },\n    \"build\": {\n      \"commands\": [\n        \"cdk-assets --path \\\"assembly-pipeline-stack-dev/pipelinestackdevdevblueprint82F6F6D4.assets.json\\\" --verbose publish \\\"2cbb4c8a663eb2c903e9cef3ad44c9b47d48b0a2cd35dfc270a23bf93b2ecf1f:966339691353-us-west-2\\\"\",\n        \"cdk-assets --path \\\"assembly-pipeline-stack-test/pipelinestacktesttestblueprint4D1A78D7.assets.json\\\" --verbose publish \\\"2cbb4c8a663eb2c903e9cef3ad44c9b47d48b0a2cd35dfc270a23bf93b2ecf1f:966339691353-us-east-2\\\"\",\n        \"cdk-assets --path \\\"assembly-pipeline-stack-prod/pipelinestackprodprodblueprintB3337379.assets.json\\\" --verbose publish \\\"2cbb4c8a663eb2c903e9cef3ad44c9b47d48b0a2cd35dfc270a23bf93b2ecf1f:966339691353-us-east-1\\\"\"\n      ]\n    }\n  }\n}",
+     "Type": "CODEPIPELINE"
+    },
+    "Cache": {
+     "Type": "NO_CACHE"
+    },
+    "Description": "Pipeline step pipeline-stack/Pipeline/Assets/FileAsset5",
+    "EncryptionKey": "alias/aws/s3"
+   },
+   "Metadata": {
+    "aws:cdk:path": "pipeline-stack/eks-bootcamp-capstone-pipeline/Assets/FileAsset5/Resource"
+   }
+  },
+  "eksbootcampcapstonepipelineAssetsFileAsset64C816957": {
+   "Type": "AWS::CodeBuild::Project",
+   "Properties": {
+    "Artifacts": {
+     "Type": "CODEPIPELINE"
+    },
+    "Environment": {
+     "ComputeType": "BUILD_GENERAL1_SMALL",
+     "Image": "aws/codebuild/standard:5.0",
+     "ImagePullCredentialsType": "CODEBUILD",
+     "PrivilegedMode": false,
+     "Type": "LINUX_CONTAINER"
+    },
+    "ServiceRole": {
+     "Fn::GetAtt": [
+      "eksbootcampcapstonepipelineAssetsFileRole4F2B7705",
+      "Arn"
+     ]
+    },
+    "Source": {
+     "BuildSpec": "{\n  \"version\": \"0.2\",\n  \"phases\": {\n    \"install\": {\n      \"commands\": [\n        \"npm install -g cdk-assets@2\"\n      ]\n    },\n    \"build\": {\n      \"commands\": [\n        \"cdk-assets --path \\\"assembly-pipeline-stack-dev/pipelinestackdevdevblueprint82F6F6D4.assets.json\\\" --verbose publish \\\"c6964dbf0c556ec82ce09622e99ad6f6d4e488cdaac0ef9e8492e078ec61ffed:966339691353-us-west-2\\\"\",\n        \"cdk-assets --path \\\"assembly-pipeline-stack-test/pipelinestacktesttestblueprint4D1A78D7.assets.json\\\" --verbose publish \\\"c6964dbf0c556ec82ce09622e99ad6f6d4e488cdaac0ef9e8492e078ec61ffed:966339691353-us-east-2\\\"\",\n        \"cdk-assets --path \\\"assembly-pipeline-stack-prod/pipelinestackprodprodblueprintB3337379.assets.json\\\" --verbose publish \\\"c6964dbf0c556ec82ce09622e99ad6f6d4e488cdaac0ef9e8492e078ec61ffed:966339691353-us-east-1\\\"\"\n      ]\n    }\n  }\n}",
+     "Type": "CODEPIPELINE"
+    },
+    "Cache": {
+     "Type": "NO_CACHE"
+    },
+    "Description": "Pipeline step pipeline-stack/Pipeline/Assets/FileAsset6",
+    "EncryptionKey": "alias/aws/s3"
+   },
+   "Metadata": {
+    "aws:cdk:path": "pipeline-stack/eks-bootcamp-capstone-pipeline/Assets/FileAsset6/Resource"
+   }
+  },
+  "eksbootcampcapstonepipelineAssetsFileAsset730AF1152": {
+   "Type": "AWS::CodeBuild::Project",
+   "Properties": {
+    "Artifacts": {
+     "Type": "CODEPIPELINE"
+    },
+    "Environment": {
+     "ComputeType": "BUILD_GENERAL1_SMALL",
+     "Image": "aws/codebuild/standard:5.0",
+     "ImagePullCredentialsType": "CODEBUILD",
+     "PrivilegedMode": false,
+     "Type": "LINUX_CONTAINER"
+    },
+    "ServiceRole": {
+     "Fn::GetAtt": [
+      "eksbootcampcapstonepipelineAssetsFileRole4F2B7705",
+      "Arn"
+     ]
+    },
+    "Source": {
+     "BuildSpec": "{\n  \"version\": \"0.2\",\n  \"phases\": {\n    \"install\": {\n      \"commands\": [\n        \"npm install -g cdk-assets@2\"\n      ]\n    },\n    \"build\": {\n      \"commands\": [\n        \"cdk-assets --path \\\"assembly-pipeline-stack-dev/pipelinestackdevdevblueprint82F6F6D4.assets.json\\\" --verbose publish \\\"6f68a0be8d7ff6423cd136aa13cc2250b8487c464f4a0895016a2ee5d8a761b7:966339691353-us-west-2\\\"\"\n      ]\n    }\n  }\n}",
+     "Type": "CODEPIPELINE"
+    },
+    "Cache": {
+     "Type": "NO_CACHE"
+    },
+    "Description": "Pipeline step pipeline-stack/Pipeline/Assets/FileAsset7",
+    "EncryptionKey": "alias/aws/s3"
+   },
+   "Metadata": {
+    "aws:cdk:path": "pipeline-stack/eks-bootcamp-capstone-pipeline/Assets/FileAsset7/Resource"
+   }
+  },
+  "eksbootcampcapstonepipelineAssetsFileAsset8AA0A2CC6": {
+   "Type": "AWS::CodeBuild::Project",
+   "Properties": {
+    "Artifacts": {
+     "Type": "CODEPIPELINE"
+    },
+    "Environment": {
+     "ComputeType": "BUILD_GENERAL1_SMALL",
+     "Image": "aws/codebuild/standard:5.0",
+     "ImagePullCredentialsType": "CODEBUILD",
+     "PrivilegedMode": false,
+     "Type": "LINUX_CONTAINER"
+    },
+    "ServiceRole": {
+     "Fn::GetAtt": [
+      "eksbootcampcapstonepipelineAssetsFileRole4F2B7705",
+      "Arn"
+     ]
+    },
+    "Source": {
+     "BuildSpec": "{\n  \"version\": \"0.2\",\n  \"phases\": {\n    \"install\": {\n      \"commands\": [\n        \"npm install -g cdk-assets@2\"\n      ]\n    },\n    \"build\": {\n      \"commands\": [\n        \"cdk-assets --path \\\"assembly-pipeline-stack-dev/pipelinestackdevdevblueprint82F6F6D4.assets.json\\\" --verbose publish \\\"07b7e4416a597a02d7ce297d35c6f68f69360b35797a09c06fa0e29ab2c1d123:966339691353-us-west-2\\\"\"\n      ]\n    }\n  }\n}",
+     "Type": "CODEPIPELINE"
+    },
+    "Cache": {
+     "Type": "NO_CACHE"
+    },
+    "Description": "Pipeline step pipeline-stack/Pipeline/Assets/FileAsset8",
+    "EncryptionKey": "alias/aws/s3"
+   },
+   "Metadata": {
+    "aws:cdk:path": "pipeline-stack/eks-bootcamp-capstone-pipeline/Assets/FileAsset8/Resource"
+   }
+  },
+  "eksbootcampcapstonepipelineAssetsFileAsset9450B2E4C": {
+   "Type": "AWS::CodeBuild::Project",
+   "Properties": {
+    "Artifacts": {
+     "Type": "CODEPIPELINE"
+    },
+    "Environment": {
+     "ComputeType": "BUILD_GENERAL1_SMALL",
+     "Image": "aws/codebuild/standard:5.0",
+     "ImagePullCredentialsType": "CODEBUILD",
+     "PrivilegedMode": false,
+     "Type": "LINUX_CONTAINER"
+    },
+    "ServiceRole": {
+     "Fn::GetAtt": [
+      "eksbootcampcapstonepipelineAssetsFileRole4F2B7705",
+      "Arn"
+     ]
+    },
+    "Source": {
+     "BuildSpec": "{\n  \"version\": \"0.2\",\n  \"phases\": {\n    \"install\": {\n      \"commands\": [\n        \"npm install -g cdk-assets@2\"\n      ]\n    },\n    \"build\": {\n      \"commands\": [\n        \"cdk-assets --path \\\"assembly-pipeline-stack-test/pipelinestacktesttestblueprint4D1A78D7.assets.json\\\" --verbose publish \\\"39642ccced5fc7164b99109c1cb5fa29e13b82617829c6469d2586549e343f08:966339691353-us-east-2\\\"\"\n      ]\n    }\n  }\n}",
+     "Type": "CODEPIPELINE"
+    },
+    "Cache": {
+     "Type": "NO_CACHE"
+    },
+    "Description": "Pipeline step pipeline-stack/Pipeline/Assets/FileAsset9",
+    "EncryptionKey": "alias/aws/s3"
+   },
+   "Metadata": {
+    "aws:cdk:path": "pipeline-stack/eks-bootcamp-capstone-pipeline/Assets/FileAsset9/Resource"
+   }
+  },
+  "CDKMetadata": {
+   "Type": "AWS::CDK::Metadata",
+   "Properties": {
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/01OSw6CMBA9C/syiiSylwsQXLg0UMY4tLSEUo1peneBgrh6n3kz806QZpBE1dvEvBGxpBrcday4YD31KEmhgVw3WKyKTcm745OzzcH9ZvlD/fMb1k+thWcmBXexXOA42ysLUGhJ/LPbQXtGVQeu1HI5tOCe3DJzi9qSbPYKxaBb5MublXrPSjTaDjycWrlnatqG1hxeyRmSDI5Ra4jiwaqROoQy4Bfk+xCiHwEAAA=="
+   },
+   "Metadata": {
+    "aws:cdk:path": "pipeline-stack/CDKMetadata/Default"
+   }
+  }
+ },
+ "Parameters": {
+  "BootstrapVersion": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "/cdk-bootstrap/hnb659fds/version",
+   "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+  }
+ },
+ "Rules": {
+  "CheckBootstrapVersion": {
+   "Assertions": [
+    {
+     "Assert": {
+      "Fn::Not": [
+       {
+        "Fn::Contains": [
+         [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+         ],
+         {
+          "Ref": "BootstrapVersion"
+         }
+        ]
+       }
+      ]
+     },
+     "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+    }
+   ]
+  }
+ }
+}

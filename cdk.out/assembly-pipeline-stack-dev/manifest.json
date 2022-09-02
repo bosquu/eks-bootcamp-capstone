@@ -1,0 +1,575 @@
+{
+  "version": "20.0.0",
+  "artifacts": {
+    "pipelinestackdevdevblueprint82F6F6D4.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "pipelinestackdevdevblueprint82F6F6D4.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "pipelinestackdevdevblueprint82F6F6D4": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://966339691353/us-west-2",
+      "properties": {
+        "templateFile": "pipelinestackdevdevblueprint82F6F6D4.template.json",
+        "validateOnSynth": true,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::966339691353:role/cdk-hnb659fds-deploy-role-966339691353-us-west-2",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::966339691353:role/cdk-hnb659fds-cfn-exec-role-966339691353-us-west-2",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-966339691353-us-west-2/e4d7230a8002a3e4507cff8676ef7640d9ae35e291ce01e9d0787688cff6c44e.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "pipelinestackdevdevblueprint82F6F6D4.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::966339691353:role/cdk-hnb659fds-lookup-role-966339691353-us-west-2",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        },
+        "stackName": "dev-dev-blueprint"
+      },
+      "dependencies": [
+        "pipelinestackdevdevblueprint82F6F6D4.assets"
+      ],
+      "metadata": {
+        "/pipeline-stack/dev/dev-blueprint/dev-blueprint-vpc/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "devblueprintvpc747DC411"
+          }
+        ],
+        "/pipeline-stack/dev/dev-blueprint/dev-blueprint-vpc/PublicSubnet1/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "devblueprintvpcPublicSubnet1Subnet289CF21E"
+          }
+        ],
+        "/pipeline-stack/dev/dev-blueprint/dev-blueprint-vpc/PublicSubnet1/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "devblueprintvpcPublicSubnet1RouteTableCD4DCFF6"
+          }
+        ],
+        "/pipeline-stack/dev/dev-blueprint/dev-blueprint-vpc/PublicSubnet1/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "devblueprintvpcPublicSubnet1RouteTableAssociation1DE8BABD"
+          }
+        ],
+        "/pipeline-stack/dev/dev-blueprint/dev-blueprint-vpc/PublicSubnet1/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "devblueprintvpcPublicSubnet1DefaultRouteD3EE809D"
+          }
+        ],
+        "/pipeline-stack/dev/dev-blueprint/dev-blueprint-vpc/PublicSubnet1/EIP": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "devblueprintvpcPublicSubnet1EIP660BDE5C"
+          }
+        ],
+        "/pipeline-stack/dev/dev-blueprint/dev-blueprint-vpc/PublicSubnet1/NATGateway": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "devblueprintvpcPublicSubnet1NATGateway27A4838E"
+          }
+        ],
+        "/pipeline-stack/dev/dev-blueprint/dev-blueprint-vpc/PublicSubnet2/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "devblueprintvpcPublicSubnet2Subnet6899B731"
+          }
+        ],
+        "/pipeline-stack/dev/dev-blueprint/dev-blueprint-vpc/PublicSubnet2/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "devblueprintvpcPublicSubnet2RouteTable1DA02E0D"
+          }
+        ],
+        "/pipeline-stack/dev/dev-blueprint/dev-blueprint-vpc/PublicSubnet2/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "devblueprintvpcPublicSubnet2RouteTableAssociationBCFF690D"
+          }
+        ],
+        "/pipeline-stack/dev/dev-blueprint/dev-blueprint-vpc/PublicSubnet2/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "devblueprintvpcPublicSubnet2DefaultRoute14B45FB4"
+          }
+        ],
+        "/pipeline-stack/dev/dev-blueprint/dev-blueprint-vpc/PublicSubnet2/EIP": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "devblueprintvpcPublicSubnet2EIP4E6B0CF5"
+          }
+        ],
+        "/pipeline-stack/dev/dev-blueprint/dev-blueprint-vpc/PublicSubnet2/NATGateway": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "devblueprintvpcPublicSubnet2NATGateway357FD4F4"
+          }
+        ],
+        "/pipeline-stack/dev/dev-blueprint/dev-blueprint-vpc/PublicSubnet3/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "devblueprintvpcPublicSubnet3Subnet953ED559"
+          }
+        ],
+        "/pipeline-stack/dev/dev-blueprint/dev-blueprint-vpc/PublicSubnet3/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "devblueprintvpcPublicSubnet3RouteTableC6FE1F2F"
+          }
+        ],
+        "/pipeline-stack/dev/dev-blueprint/dev-blueprint-vpc/PublicSubnet3/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "devblueprintvpcPublicSubnet3RouteTableAssociation903D92F3"
+          }
+        ],
+        "/pipeline-stack/dev/dev-blueprint/dev-blueprint-vpc/PublicSubnet3/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "devblueprintvpcPublicSubnet3DefaultRoute62EFDD3F"
+          }
+        ],
+        "/pipeline-stack/dev/dev-blueprint/dev-blueprint-vpc/PublicSubnet3/EIP": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "devblueprintvpcPublicSubnet3EIP56A329E3"
+          }
+        ],
+        "/pipeline-stack/dev/dev-blueprint/dev-blueprint-vpc/PublicSubnet3/NATGateway": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "devblueprintvpcPublicSubnet3NATGateway7FD4981B"
+          }
+        ],
+        "/pipeline-stack/dev/dev-blueprint/dev-blueprint-vpc/PrivateSubnet1/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "devblueprintvpcPrivateSubnet1Subnet87E8AFB4"
+          }
+        ],
+        "/pipeline-stack/dev/dev-blueprint/dev-blueprint-vpc/PrivateSubnet1/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "devblueprintvpcPrivateSubnet1RouteTable58E1DC0F"
+          }
+        ],
+        "/pipeline-stack/dev/dev-blueprint/dev-blueprint-vpc/PrivateSubnet1/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "devblueprintvpcPrivateSubnet1RouteTableAssociation7B079A13"
+          }
+        ],
+        "/pipeline-stack/dev/dev-blueprint/dev-blueprint-vpc/PrivateSubnet1/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "devblueprintvpcPrivateSubnet1DefaultRouteD7281F01"
+          }
+        ],
+        "/pipeline-stack/dev/dev-blueprint/dev-blueprint-vpc/PrivateSubnet2/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "devblueprintvpcPrivateSubnet2Subnet260858B5"
+          }
+        ],
+        "/pipeline-stack/dev/dev-blueprint/dev-blueprint-vpc/PrivateSubnet2/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "devblueprintvpcPrivateSubnet2RouteTableF6860A55"
+          }
+        ],
+        "/pipeline-stack/dev/dev-blueprint/dev-blueprint-vpc/PrivateSubnet2/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "devblueprintvpcPrivateSubnet2RouteTableAssociationD5378F63"
+          }
+        ],
+        "/pipeline-stack/dev/dev-blueprint/dev-blueprint-vpc/PrivateSubnet2/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "devblueprintvpcPrivateSubnet2DefaultRouteB7DAFEA6"
+          }
+        ],
+        "/pipeline-stack/dev/dev-blueprint/dev-blueprint-vpc/PrivateSubnet3/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "devblueprintvpcPrivateSubnet3Subnet5BCF355A"
+          }
+        ],
+        "/pipeline-stack/dev/dev-blueprint/dev-blueprint-vpc/PrivateSubnet3/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "devblueprintvpcPrivateSubnet3RouteTable35750E66"
+          }
+        ],
+        "/pipeline-stack/dev/dev-blueprint/dev-blueprint-vpc/PrivateSubnet3/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "devblueprintvpcPrivateSubnet3RouteTableAssociation60CAF9EE"
+          }
+        ],
+        "/pipeline-stack/dev/dev-blueprint/dev-blueprint-vpc/PrivateSubnet3/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "devblueprintvpcPrivateSubnet3DefaultRouteC5BBD1FD"
+          }
+        ],
+        "/pipeline-stack/dev/dev-blueprint/dev-blueprint-vpc/IGW": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "devblueprintvpcIGW8CC1724C"
+          }
+        ],
+        "/pipeline-stack/dev/dev-blueprint/dev-blueprint-vpc/VPCGW": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "devblueprintvpcVPCGW41D7F671"
+          }
+        ],
+        "/pipeline-stack/dev/dev-blueprint/dev-blueprint/Role/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "devblueprintRole02402770"
+          }
+        ],
+        "/pipeline-stack/dev/dev-blueprint/dev-blueprint/ControlPlaneSecurityGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "devblueprintControlPlaneSecurityGroup6D10D99F"
+          }
+        ],
+        "/pipeline-stack/dev/dev-blueprint/dev-blueprint/Resource/CreationRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "devblueprintCreationRole4B7B7FBC"
+          }
+        ],
+        "/pipeline-stack/dev/dev-blueprint/dev-blueprint/Resource/CreationRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "devblueprintCreationRoleDefaultPolicy50B7AB85"
+          }
+        ],
+        "/pipeline-stack/dev/dev-blueprint/dev-blueprint/Resource/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "devblueprintA4E806F1"
+          }
+        ],
+        "/pipeline-stack/dev/dev-blueprint/dev-blueprint/KubectlReadyBarrier": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "devblueprintKubectlReadyBarrierB9176DD0"
+          }
+        ],
+        "/pipeline-stack/dev/dev-blueprint/dev-blueprint/ClusterName": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "devblueprintClusterNameC2557A04"
+          }
+        ],
+        "/pipeline-stack/dev/dev-blueprint/dev-blueprint/MastersRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "devblueprintMastersRole2DDF8CFC"
+          }
+        ],
+        "/pipeline-stack/dev/dev-blueprint/dev-blueprint/AwsAuth/manifest/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "devblueprintAwsAuthmanifestF568648C"
+          }
+        ],
+        "/pipeline-stack/dev/dev-blueprint/dev-blueprint/ConfigCommand": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "devblueprintConfigCommand24FB2D8A"
+          }
+        ],
+        "/pipeline-stack/dev/dev-blueprint/dev-blueprint/GetTokenCommand": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "devblueprintGetTokenCommand94C808F5"
+          }
+        ],
+        "/pipeline-stack/dev/dev-blueprint/dev-blueprint/Nodegroupdev-blueprint-ng-ng/NodeGroupRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "devblueprintNodegroupdevblueprintngngNodeGroupRole0EDCE962"
+          }
+        ],
+        "/pipeline-stack/dev/dev-blueprint/dev-blueprint/Nodegroupdev-blueprint-ng-ng/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "devblueprintNodegroupdevblueprintngngAC42F0BF"
+          }
+        ],
+        "/pipeline-stack/dev/dev-blueprint/@aws-cdk--aws-eks.ClusterResourceProvider/NodeProxyAgentLayer/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NodeProxyAgentLayer924C1971"
+          }
+        ],
+        "/pipeline-stack/dev/dev-blueprint/@aws-cdk--aws-eks.ClusterResourceProvider/OnEventHandler/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "OnEventHandlerServiceRole15A26729"
+          }
+        ],
+        "/pipeline-stack/dev/dev-blueprint/@aws-cdk--aws-eks.ClusterResourceProvider/OnEventHandler/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "OnEventHandlerServiceRoleDefaultPolicyC57085D4"
+          }
+        ],
+        "/pipeline-stack/dev/dev-blueprint/@aws-cdk--aws-eks.ClusterResourceProvider/OnEventHandler/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "OnEventHandler42BEBAE0"
+          }
+        ],
+        "/pipeline-stack/dev/dev-blueprint/@aws-cdk--aws-eks.ClusterResourceProvider/IsCompleteHandler/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "IsCompleteHandlerServiceRole5810CC58"
+          }
+        ],
+        "/pipeline-stack/dev/dev-blueprint/@aws-cdk--aws-eks.ClusterResourceProvider/IsCompleteHandler/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "IsCompleteHandlerServiceRoleDefaultPolicy8F64197B"
+          }
+        ],
+        "/pipeline-stack/dev/dev-blueprint/@aws-cdk--aws-eks.ClusterResourceProvider/IsCompleteHandler/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "IsCompleteHandler7073F4DA"
+          }
+        ],
+        "/pipeline-stack/dev/dev-blueprint/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onEvent/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderframeworkonEventServiceRole9FF04296"
+          }
+        ],
+        "/pipeline-stack/dev/dev-blueprint/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onEvent/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderframeworkonEventServiceRoleDefaultPolicy48CD2133"
+          }
+        ],
+        "/pipeline-stack/dev/dev-blueprint/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onEvent/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderframeworkonEvent83C1D0A7"
+          }
+        ],
+        "/pipeline-stack/dev/dev-blueprint/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-isComplete/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderframeworkisCompleteServiceRoleB1087139"
+          }
+        ],
+        "/pipeline-stack/dev/dev-blueprint/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-isComplete/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderframeworkisCompleteServiceRoleDefaultPolicy2E7140AC"
+          }
+        ],
+        "/pipeline-stack/dev/dev-blueprint/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-isComplete/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderframeworkisComplete26D7B0CB"
+          }
+        ],
+        "/pipeline-stack/dev/dev-blueprint/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onTimeout/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderframeworkonTimeoutServiceRole28643D26"
+          }
+        ],
+        "/pipeline-stack/dev/dev-blueprint/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onTimeout/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderframeworkonTimeoutServiceRoleDefaultPolicy2688969F"
+          }
+        ],
+        "/pipeline-stack/dev/dev-blueprint/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onTimeout/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderframeworkonTimeout0B47CA38"
+          }
+        ],
+        "/pipeline-stack/dev/dev-blueprint/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/waiter-state-machine/Role/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderwaiterstatemachineRole0C7159F9"
+          }
+        ],
+        "/pipeline-stack/dev/dev-blueprint/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/waiter-state-machine/Role/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderwaiterstatemachineRoleDefaultPolicyD3C3DA1A"
+          }
+        ],
+        "/pipeline-stack/dev/dev-blueprint/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/waiter-state-machine/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "Providerwaiterstatemachine5D4A9DF0"
+          }
+        ],
+        "/pipeline-stack/dev/dev-blueprint/@aws-cdk--aws-eks.ClusterResourceProvider/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/pipeline-stack/dev/dev-blueprint/@aws-cdk--aws-eks.ClusterResourceProvider/pipelinestackdevdevblueprintawscdkawseksClusterResourceProviderframeworkonEvent9EE920E2Arn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "pipelinestackdevdevblueprintawscdkawseksClusterResourceProviderframeworkonEvent9EE920E2Arn"
+          }
+        ],
+        "/pipeline-stack/dev/dev-blueprint/@aws-cdk--aws-eks.ClusterResourceProvider/reference-to-pipelinestackdevdevblueprintCreationRole553C2DB0Arn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetopipelinestackdevdevblueprintCreationRole553C2DB0Arn"
+          }
+        ],
+        "/pipeline-stack/dev/dev-blueprint/@aws-cdk--aws-eks.ClusterResourceProvider.NestedStack/@aws-cdk--aws-eks.ClusterResourceProvider.NestedStackResource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awscdkawseksClusterResourceProviderNestedStackawscdkawseksClusterResourceProviderNestedStackResource9827C454"
+          }
+        ],
+        "/pipeline-stack/dev/dev-blueprint/@aws-cdk--aws-eks.KubectlProvider/Handler/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "HandlerServiceRoleFCDC14AE"
+          }
+        ],
+        "/pipeline-stack/dev/dev-blueprint/@aws-cdk--aws-eks.KubectlProvider/Handler/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "HandlerServiceRoleDefaultPolicyCBD0CC91"
+          }
+        ],
+        "/pipeline-stack/dev/dev-blueprint/@aws-cdk--aws-eks.KubectlProvider/Handler/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "Handler886CB40B"
+          }
+        ],
+        "/pipeline-stack/dev/dev-blueprint/@aws-cdk--aws-eks.KubectlProvider/AwsCliLayer/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AwsCliLayerF44AAF94"
+          }
+        ],
+        "/pipeline-stack/dev/dev-blueprint/@aws-cdk--aws-eks.KubectlProvider/KubectlLayer/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "KubectlLayer600207B5"
+          }
+        ],
+        "/pipeline-stack/dev/dev-blueprint/@aws-cdk--aws-eks.KubectlProvider/Provider/framework-onEvent/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderframeworkonEventServiceRole9FF04296"
+          }
+        ],
+        "/pipeline-stack/dev/dev-blueprint/@aws-cdk--aws-eks.KubectlProvider/Provider/framework-onEvent/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderframeworkonEventServiceRoleDefaultPolicy48CD2133"
+          }
+        ],
+        "/pipeline-stack/dev/dev-blueprint/@aws-cdk--aws-eks.KubectlProvider/Provider/framework-onEvent/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderframeworkonEvent83C1D0A7"
+          }
+        ],
+        "/pipeline-stack/dev/dev-blueprint/@aws-cdk--aws-eks.KubectlProvider/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/pipeline-stack/dev/dev-blueprint/@aws-cdk--aws-eks.KubectlProvider/pipelinestackdevdevblueprintawscdkawseksKubectlProviderframeworkonEvent1E80A673Arn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "pipelinestackdevdevblueprintawscdkawseksKubectlProviderframeworkonEvent1E80A673Arn"
+          }
+        ],
+        "/pipeline-stack/dev/dev-blueprint/@aws-cdk--aws-eks.KubectlProvider/reference-to-pipelinestackdevdevblueprint267B112FArn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetopipelinestackdevdevblueprint267B112FArn"
+          }
+        ],
+        "/pipeline-stack/dev/dev-blueprint/@aws-cdk--aws-eks.KubectlProvider/reference-to-pipelinestackdevdevblueprintCreationRole553C2DB0Arn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetopipelinestackdevdevblueprintCreationRole553C2DB0Arn"
+          }
+        ],
+        "/pipeline-stack/dev/dev-blueprint/@aws-cdk--aws-eks.KubectlProvider/reference-to-pipelinestackdevdevblueprintdevblueprintvpcPrivateSubnet1Subnet3D6CCD09Ref": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetopipelinestackdevdevblueprintdevblueprintvpcPrivateSubnet1Subnet3D6CCD09Ref"
+          }
+        ],
+        "/pipeline-stack/dev/dev-blueprint/@aws-cdk--aws-eks.KubectlProvider/reference-to-pipelinestackdevdevblueprintdevblueprintvpcPrivateSubnet2Subnet956CFF52Ref": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetopipelinestackdevdevblueprintdevblueprintvpcPrivateSubnet2Subnet956CFF52Ref"
+          }
+        ],
+        "/pipeline-stack/dev/dev-blueprint/@aws-cdk--aws-eks.KubectlProvider/reference-to-pipelinestackdevdevblueprintdevblueprintvpcPrivateSubnet3Subnet3534F620Ref": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetopipelinestackdevdevblueprintdevblueprintvpcPrivateSubnet3Subnet3534F620Ref"
+          }
+        ],
+        "/pipeline-stack/dev/dev-blueprint/@aws-cdk--aws-eks.KubectlProvider/reference-to-pipelinestackdevdevblueprint267B112FClusterSecurityGroupId": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetopipelinestackdevdevblueprint267B112FClusterSecurityGroupId"
+          }
+        ],
+        "/pipeline-stack/dev/dev-blueprint/@aws-cdk--aws-eks.KubectlProvider.NestedStack/@aws-cdk--aws-eks.KubectlProvider.NestedStackResource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B"
+          }
+        ],
+        "/pipeline-stack/dev/dev-blueprint/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/pipeline-stack/dev/dev-blueprint/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/pipeline-stack/dev/dev-blueprint/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "pipeline-stack/dev/dev-blueprint"
+    }
+  }
+}
