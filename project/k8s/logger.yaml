@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: logger-service
-        image: "ubosquet/logger-service:1.0.1"
+        image: "ubosquet/logger-service:1.0.0"
         env:
           - name: RABBIT_URL
             value: "amqp://guest:guest@rabbitmq"
