@@ -21,31 +21,31 @@ export default class PipelineConstruct extends Construct {
     .teams(new TeamPlatform(account), new TeamApplication('burnham',account));
     
        // ADDING THE ARGOCD APP OF APPS REPO INFORMATION
-    const repoUrl = 'https://github.com/bosquu/eks-bootcamp-capstone.git';
-    // https://github.com/aws-samples/eks-blueprints-workloads.git
+    const repoUrl = ' https://github.com/aws-samples/eks-blueprints-workloads.git';
+    // https://github.com/bosquu/eks-bootcamp-capstone.git
 
     const bootstrapRepo : blueprints.ApplicationRepository = {
         repoUrl,
-        targetRevision: 'main',
+        targetRevision: 'workshop',
     }
 
     //  GENERATING THE ADDON CONFIGURATIONS
     const devBootstrapArgo = new blueprints.ArgoCDAddOn({
         bootstrapRepo: {
             ...bootstrapRepo,
-            path: 'yaml'
+            path: 'envs/dev'
         },
     });
     const testBootstrapArgo = new blueprints.ArgoCDAddOn({
         bootstrapRepo: {
             ...bootstrapRepo,
-            path: 'yaml'
+            path: 'envs/test'
         },
     });
     const prodBootstrapArgo = new blueprints.ArgoCDAddOn({
         bootstrapRepo: {
             ...bootstrapRepo,
-            path: 'yaml'
+            path: 'envs/prod'
         },
     });
 
