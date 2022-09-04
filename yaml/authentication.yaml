@@ -25,7 +25,7 @@ spec:
             cpu: "500m"
         env:
           - name: DSN
-            value: "host=host.kubernetes.default port=5432 user=postgres password=password dbname=users sslmode=disable timezone=UTC connect_timeout=5"
+            value: "host=team-burnham.svc.cluster.local port=5432 user=postgres password=password dbname=users sslmode=disable timezone=UTC connect_timeout=5"
         ports:
           - containerPort: 80
 
