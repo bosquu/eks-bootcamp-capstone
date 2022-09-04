@@ -1,0 +1,16 @@
+#from broker service
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: broker-service
+  namespace: team-burnham
+spec:
+  selector:
+    app: broker-service
+  ports:
+    - protocol: TCP 
+      name: main-port
+      port: 8080
+      targetPort: 8080

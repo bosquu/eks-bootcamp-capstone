@@ -12,12 +12,14 @@ export default class PipelineConstruct extends Construct {
     const region = props?.env?.region!;
     // Adding Addons to the Cluster
     const kubeaddOn = new KubecostAddOn();
+    const nginxAddOn = new blueprints.NginxAddOn()
 
     const blueprint = blueprints.EksBlueprint.builder()
     .account(account)
     .region(region)
-    .addOns(new blueprints.ClusterAutoScalerAddOn,new blueprints.AwsLoadBalancerControllerAddOn(),
-    kubeaddOn)
+    .addOns(new blueprints.ClusterAutoScalerAddOn,
+    new blueprints.AwsLoadBalancerControllerAddOn(),
+    kubeaddOn, nginxAddOn)
     .teams(new TeamPlatform(account), new TeamApplication('burnham',account));
     
        // ADDING THE ARGOCD APP OF APPS REPO INFORMATION

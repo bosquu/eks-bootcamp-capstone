@@ -44,4 +44,3 @@ spec:
       name: main-port
       port: 8081
       targetPort: 8081
-  type: LoadBalancer
