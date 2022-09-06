@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: front-end
-        image: "966339691353.dkr.ecr.us-west-2.amazonaws.com/eks-capstone-front-end:1.01"
+        image: "966339691353.dkr.ecr.us-west-2.amazonaws.com/eks-capstone-front-end:1.02"
         resources:
           requests:
             memory: "64Mi"
@@ -25,7 +25,7 @@ spec:
             cpu: "500m"
         env:
           - name: BROKER_URL
-            value: "http://broker-service.info"
+            value: "http://broker-service"
         ports:
           - containerPort: 8081
 
