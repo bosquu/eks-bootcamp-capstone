@@ -1,0 +1,30 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"networking.k8s.io/v1","kind":"Ingress","metadata":{"annotations":{"kubernetes.io/ingress.class":"nginx","nginx.ingress.kubernetes.io/rewrite-target":"/$1","nginx.ingress.kubernetes.io/use-regex":"true"},"name":"ingress-service","namespace":"default"},"spec":{"rules":[{"http":{"paths":[{"backend":{"service":{"name":"client-cluster-ip-service","port":{"number":3000}}},"path":"/?(.*)","pathType":"Prefix"}]}}]}}
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+    nginx.ingress.kubernetes.io/use-regex: "true"
+  creationTimestamp: "2022-09-06T22:26:08Z"
+  generation: 1
+  name: ingress-service
+  namespace: default
+  resourceVersion: "6014311"
+  uid: 57eff97e-c4a8-47aa-83d8-2e25c6384abd
+spec:
+  rules:
+  - http:
+      paths:
+      - backend:
+          service:
+            name: client-cluster-ip-service
+            port:
+              number: 3000
+        path: /?(.*)
+        pathType: Prefix
+status:
+  loadBalancer:
+    ingress:
+    - hostname: a949ba13f7771432795ef57297da75fa-f0b9aeca6c7e7ed3.elb.us-west-2.amazonaws.com

@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"name":"server-cluster-ip-service","namespace":"default"},"spec":{"ports":[{"port":5000,"targetPort":5000}],"selector":{"component":"server"},"type":"ClusterIP"}}
+  creationTimestamp: "2022-09-06T20:15:42Z"
+  name: server-cluster-ip-service
+  namespace: default
+  resourceVersion: "1288766"
+  uid: 17c89f6f-7990-40bf-a305-7271f76c002e
+spec:
+  clusterIP: 172.20.17.232
+  clusterIPs:
+  - 172.20.17.232
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - port: 5000
+    protocol: TCP
+    targetPort: 5000
+  selector:
+    component: server
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}
